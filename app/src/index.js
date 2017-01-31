@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 class ParameterFlag extends React.Component {
     render() {
         return (
-            <span className="badge badge-default">$</span>
+            <span className="badge badge-default">${this.props.flagId}</span>
         );
     }
 }
@@ -30,7 +30,7 @@ class ParametersTableRow extends React.Component {
         return (
             <tr>
                 <td className="text-right">
-                    <ParameterFlag />
+                    <ParameterFlag flagId={this.props.flagId} />
                 </td>
                 <td>
                     <ParameterName />
@@ -56,11 +56,16 @@ class ParametersTableFooter extends React.Component {
 }
 
 class ParametersTable extends React.Component {
+    tableRows() {
+        let mapper = (i) => <ParametersTableRow key={i} flagId={i} />;
+        return this.props.parameters.map(mapper);
+    }
+
     render() {
         return (
             <table className="table table-bordered">
                 <tbody>
-                    <ParametersTableRow />
+                    {this.tableRows()}
                     <ParametersTableFooter />
                 </tbody>
             </table>
@@ -74,7 +79,7 @@ class Parameters extends React.Component {
             <div className="row">
                 <div className="col">
                     <h1>Choose parameters</h1>
-                    <ParametersTable />
+                    <ParametersTable parameters={['test']} />
                 </div>
             </div>
         );
