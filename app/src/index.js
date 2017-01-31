@@ -159,43 +159,6 @@ class EvaluationTest extends React.Component {
     }
 }
 
-class EvaluationSaveName extends React.Component {
-    render() {
-        return (
-            <div>
-                <label>Give it a name</label>
-                <input type="text" className="form-control" />
-            </div>
-        );
-    }
-}
-
-class EvaluationSaveAction extends React.Component {
-    render() {
-        return (
-            <div>
-                <label>and</label>
-                <button className="btn btn-primary btn-block">Save</button>
-            </div>
-        );
-    }
-}
-
-class EvaluationSave extends React.Component {
-    render() {
-        return (
-            <div className="row">
-                <div className="col-8">
-                    <EvaluationSaveName />
-                </div>
-                <div className="col-4">
-                    <EvaluationSaveAction />
-                </div>
-            </div>
-        );
-    }
-}
-
 class Evaluation extends React.Component {
     render() {
         return (
@@ -203,7 +166,6 @@ class Evaluation extends React.Component {
                 <div className="col">
                     <h1>Evaluate</h1>
                     <EvaluationTest />
-                    <EvaluationSave />
                 </div>
             </div>
         );
