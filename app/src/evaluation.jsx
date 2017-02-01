@@ -1,8 +1,8 @@
 import React from 'react';
 
-const EvaluationInputs = () => (
+const EvaluationInputs = ({name}) => (
     <div className="text-right">
-        <pre>X</pre>
+        <pre>{name}</pre>
         <input type="text" className="form-control form-control-sm" />
     </div>
 );
@@ -16,25 +16,39 @@ const EvaluationResult = () => (
     />
 );
 
-const EvaluationTest = () => (
-    <div className="row align-items-center">
-        <div className="col-5">
-            <EvaluationInputs />
-        </div>
-        <div className="col-2 text-center">
-            <i className="fa fa-arrow-right fa-2x"></i>
-        </div>
-        <div className="col-5">
-            <EvaluationResult />
-        </div>
-    </div>
-);
+class EvaluationTest extends React.Component {
+    constructor(props) {
+        super(props);
+        this.mapParameters = this.mapParameters.bind(this);
+    }
 
-const Evaluation = () => (
+    mapParameters() {
+        let mapper = (text, i) => <EvaluationInputs key={i} name={text} />;
+        return this.props.parameters.map(mapper);
+    }
+
+    render() {
+        return (
+            <div className="row align-items-center">
+                <div className="col-5">
+                    {this.mapParameters()}
+                </div>
+                <div className="col-2 text-center">
+                    <i className="fa fa-arrow-right fa-2x"></i>
+                </div>
+                <div className="col-5">
+                    <EvaluationResult />
+                </div>
+            </div>
+        );
+    }
+}
+
+const Evaluation = ({parameters}) => (
     <div className="row">
         <div className="col">
             <h1>Evaluate</h1>
-            <EvaluationTest />
+            <EvaluationTest parameters={parameters} />
         </div>
     </div>
 );
