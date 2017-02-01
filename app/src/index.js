@@ -28,18 +28,35 @@ const ParametersTableRow = ({flagText}) => (
     </tr>
 );
 
-const ParametersTableFooter = () => (
+const ParametersTableFooter = ({clickHandler}) => (
     <tr>
         <td colSpan="3">
-            <button className="btn btn-secondary btn-block">Add</button>
+            <button
+                className="btn btn-secondary btn-block"
+                onClick={clickHandler}
+            >
+                Add
+            </button>
         </td>
     </tr>
 );
 
 class ParametersTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.tableRows = this.tableRows.bind(this);
+        this.addRow = this.addRow.bind(this);
+
+        this.state = {parameters: this.props.parameters || []};
+    }
+
     tableRows() {
         let mapper = (text, i) => <ParametersTableRow key={i} flagText={text} />;
-        return this.props.parameters.map(mapper);
+        return this.state.parameters.map(mapper);
+    }
+
+    addRow() {
+        this.setState({parameters: this.state.parameters.concat(['clicked'])});
     }
 
     render() {
@@ -47,7 +64,7 @@ class ParametersTable extends React.Component {
             <table className="table table-bordered">
                 <tbody>
                     {this.tableRows()}
-                    <ParametersTableFooter />
+                    <ParametersTableFooter clickHandler={this.addRow} />
                 </tbody>
             </table>
         );
@@ -58,7 +75,7 @@ const Parameters = () => (
     <div className="row">
         <div className="col">
             <h1>Choose parameters</h1>
-            <ParametersTable parameters={['test', 'row2']} />
+            <ParametersTable parameters={['vrau', 'test']}/>
         </div>
     </div>
 );
