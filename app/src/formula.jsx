@@ -3,7 +3,7 @@ import React from 'react';
 const FormulaInput = () => <input type="text" className="form-control" />;
 
 const FormulaPreview = () => (
-    <div className="card">
+    <div className="card formula-display">
         <div className="card-block text-center text-muted">
             Human-readable version here
         </div>

@@ -30,10 +30,10 @@ const ParametersTableFooter = ({clickHandler}) => (
     <tr>
         <td colSpan="3">
             <button
-                className="btn btn-secondary btn-block"
+                className="btn btn-secondary btn-block btn-sm"
                 onClick={clickHandler}
             >
-                Add
+                <i className="fa fa-plus" /> Add
             </button>
         </td>
     </tr>
@@ -52,7 +52,7 @@ class ParametersTable extends React.Component {
 
     render() {
         return (
-            <table className="table table-bordered">
+            <table className="table table-bordered table-sm">
                 <tbody>
                     {this.mapTableRows()}
                     <ParametersTableFooter clickHandler={this.props.addHandler} />

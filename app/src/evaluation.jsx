@@ -1,8 +1,8 @@
 import React from 'react';
 
 const EvaluationInputs = ({name}) => (
-    <div className="text-right">
-        <pre>{name}</pre>
+    <div className="evaluation-parameter">
+        <label>{name}</label>
         <input type="text" className="form-control form-control-sm" />
     </div>
 );
@@ -10,9 +10,9 @@ const EvaluationInputs = ({name}) => (
 const EvaluationResult = () => (
     <input
         type="text"
-        className="form-control form-control sm"
+        className="form-control form-control-lg result-display"
         disabled
-        value="666"
+        value="123"
     />
 );
 
