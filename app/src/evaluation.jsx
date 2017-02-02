@@ -21,36 +21,39 @@ const EvaluationResult = ({value}) => (
     />
 );
 
+const createInput = (label) => ({label: label, value: 0});
+
 class EvaluationTester extends React.Component {
     constructor(props) {
         super(props);
         this.mapParameters = this.mapParameters.bind(this);
         this.evaluateResult = this.evaluateResult.bind(this);
-        this.updateValue = this.updateValue.bind(this);
 
-        this.state = {values: [124]}
+        this.state = {inputs: this.props.parameters.map(createInput)}
     }
 
     evaluateResult() {
         // adding the values until we can use the formula
-        let reducer = (carry, value) => (carry + value);
-        return this.state.values.reduce(reducer, 0);
+        let reducer = (carry, input) => (carry + parseInt(input.value, 10));
+        return this.state.inputs.reduce(reducer, 0) || 0;
     }
 
     mapParameters() {
-        let mapper = (text, i) => (
+        let mapper = (input, i) => (
             <EvaluationInputs
                 key={i}
-                name={text}
-                value={this.state.values[i]}
-                changeHandler={this.updateValue}
+                name={input.label}
+                value={input.value}
+                changeHandler={this.updateValue.bind(this, i)}
             />
         );
-        return this.props.parameters.map(mapper);
+        return this.state.inputs.map(mapper);
     }
 
-    updateValue() {
-        console.log('Value should change');
+    updateValue(i, event) {
+        var inputs = this.state.inputs.slice();
+        inputs[i].value = event.target.value;
+        this.setState({inputs: inputs});
     }
 
     render() {
