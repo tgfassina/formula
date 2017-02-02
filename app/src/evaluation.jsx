@@ -30,8 +30,9 @@ class EvaluationTester extends React.Component {
 
     evaluateResult() {
         // adding the values until we can use the formula
-        let reducer = (carry, input) => (carry + parseInt(input.value, 10));
-        return this.props.inputs.reduce(reducer, 0) || 0;
+        const getInt = (string) => parseInt(string, 10) || 0;
+        let reducer = (carry, input) => carry + getInt(input.value);
+        return this.props.inputs.reduce(reducer, 0);
     }
 
     updateValue(i, event) {
