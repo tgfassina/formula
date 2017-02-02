@@ -46,7 +46,7 @@ class ParametersTable extends React.Component {
     }
 
     mapTableRows() {
-        let mapper = (text, i) => <ParametersTableRow key={i} flagText={text} />;
+        let mapper = (input, i) => <ParametersTableRow key={i} flagText={input.label} />;
         return this.props.parameters.map(mapper);
     }
 

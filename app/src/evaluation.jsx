@@ -4,7 +4,7 @@ const EvaluationInputs = ({name, value, changeHandler}) => (
     <div className="evaluation-parameter">
         <label>{name}</label>
         <input
-            type="text"
+            type="number"
             className="form-control form-control-sm"
             value={value}
             onChange={changeHandler}
@@ -21,21 +21,21 @@ const EvaluationResult = ({value}) => (
     />
 );
 
-const createInput = (label) => ({label: label, value: 0});
-
 class EvaluationTester extends React.Component {
     constructor(props) {
         super(props);
         this.mapParameters = this.mapParameters.bind(this);
         this.evaluateResult = this.evaluateResult.bind(this);
-
-        this.state = {inputs: this.props.parameters.map(createInput)}
     }
 
     evaluateResult() {
         // adding the values until we can use the formula
         let reducer = (carry, input) => (carry + parseInt(input.value, 10));
-        return this.state.inputs.reduce(reducer, 0) || 0;
+        return this.props.inputs.reduce(reducer, 0) || 0;
+    }
+
+    updateValue(i, event) {
+        this.props.updateHandler(i, event.target.value);
     }
 
     mapParameters() {
@@ -47,13 +47,7 @@ class EvaluationTester extends React.Component {
                 changeHandler={this.updateValue.bind(this, i)}
             />
         );
-        return this.state.inputs.map(mapper);
-    }
-
-    updateValue(i, event) {
-        var inputs = this.state.inputs.slice();
-        inputs[i].value = event.target.value;
-        this.setState({inputs: inputs});
+        return this.props.inputs.map(mapper);
     }
 
     render() {
@@ -73,11 +67,14 @@ class EvaluationTester extends React.Component {
     }
 }
 
-const Evaluation = ({parameters}) => (
+const Evaluation = ({inputs, updateHandler}) => (
     <div className="row">
         <div className="col">
             <h1>Evaluate</h1>
-            <EvaluationTester parameters={parameters} />
+            <EvaluationTester
+                inputs={inputs}
+                updateHandler={updateHandler}
+            />
         </div>
     </div>
 );
