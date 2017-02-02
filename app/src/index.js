@@ -5,7 +5,7 @@ import Parameters from './parameters.jsx';
 import Formula from './formula.jsx';
 import Evaluation from './evaluation.jsx';
 
-const createInput = (label) => ({label: label, value: 0});
+const createInput = (label) => ({label: label, value: ''});
 
 class CreateFormula extends React.Component {
     constructor() {
