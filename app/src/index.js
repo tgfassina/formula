@@ -1,139 +1,50 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Parameters from './parameters.jsx';
+import Formula from './formula.jsx';
+import Evaluation from './evaluation.jsx';
 
-const ParameterFlag = ({flagText}) => (
-    <span className="badge badge-default">
-        ${flagText}
-    </span>
-);
+const createInput = (label) => ({label: label, value: ''});
 
-const ParameterName = () => (
-    <input type="text" className="form-control form-control-sm" />
-);
+class CreateFormula extends React.Component {
+    constructor() {
+        super();
+        this.addParameter = this.addParameter.bind(this);
+        this.updateValue = this.updateValue.bind(this);
 
-const ParameterOptions = () => <i className="fa fa-chevron-down" />;
+        this.state = {inputList: [createInput('natural')]};
+    }
 
-const ParametersTableRow = ({flagText}) => (
-    <tr>
-        <td className="text-right">
-            <ParameterFlag flagText={flagText} />
-        </td>
-        <td>
-            <ParameterName />
-        </td>
-        <td className="text-center">
-            <ParameterOptions />
-        </td>
-    </tr>
-);
+    addParameter() {
+        let newList = this.state.inputList.concat([createInput('artificial')]);
+        this.setState({inputList: newList});
+    }
 
-const ParametersTableFooter = () => (
-    <tr>
-        <td colSpan="3">
-            <button className="btn btn-secondary btn-block">Add</button>
-        </td>
-    </tr>
-);
-
-class ParametersTable extends React.Component {
-    tableRows() {
-        let mapper = (text, i) => <ParametersTableRow key={i} flagText={text} />;
-        return this.props.parameters.map(mapper);
+    updateValue(i, value) {
+        var inputs = this.state.inputList.slice();
+        inputs[i].value = value;
+        this.setState({inputList: inputs});
     }
 
     render() {
         return (
-            <table className="table table-bordered">
-                <tbody>
-                    {this.tableRows()}
-                    <ParametersTableFooter />
-                </tbody>
-            </table>
+            <div>
+                <Parameters
+                    list={this.state.inputList}
+                    addHandler={this.addParameter}
+                />
+                <hr />
+                <Formula />
+                <hr />
+                <Evaluation
+                    inputs={this.state.inputList}
+                    updateHandler={this.updateValue}
+                />
+            </div>
         );
     }
 }
-
-const Parameters = () => (
-    <div className="row">
-        <div className="col">
-            <h1>Choose parameters</h1>
-            <ParametersTable parameters={['test', 'row2']} />
-        </div>
-    </div>
-);
-
-
-const FormulaInput = () => <input type="text" className="form-control" />;
-
-const FormulaPreview = () => (
-    <div className="card">
-        <div className="card-block text-center text-muted">
-            Human-readable version here
-        </div>
-    </div>
-);
-
-const Formula = () => (
-    <div className="row">
-        <div className="col">
-            <h1>Write formula</h1>
-            <FormulaInput />
-            <FormulaPreview />
-        </div>
-    </div>
-);
-
-
-const EvaluationInputs = () => (
-    <div className="text-right">
-        <pre>X</pre>
-        <input type="text" className="form-control form-control-sm" />
-    </div>
-);
-
-const EvaluationResult = () => (
-    <input
-        type="text"
-        className="form-control form-control sm"
-        disabled
-        value="666"
-    />
-);
-
-const EvaluationTest = () => (
-    <div className="row align-items-center">
-        <div className="col-5">
-            <EvaluationInputs />
-        </div>
-        <div className="col-2 text-center">
-            <i className="fa fa-arrow-right fa-2x"></i>
-        </div>
-        <div className="col-5">
-            <EvaluationResult />
-        </div>
-    </div>
-);
-
-const Evaluation = () => (
-    <div className="row">
-        <div className="col">
-            <h1>Evaluate</h1>
-            <EvaluationTest />
-        </div>
-    </div>
-);
-
-
-const CreateFormula = () => (
-    <div>
-        <Parameters />
-        <hr />
-        <Formula />
-        <hr />
-        <Evaluation />
-    </div>
-);
 
 
 ReactDOM.render(
