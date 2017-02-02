@@ -10,7 +10,11 @@ const ParameterName = () => (
     <input type="text" className="form-control form-control-sm" />
 );
 
-const ParameterOptions = () => <i className="fa fa-chevron-down" />;
+const ParameterOptions = () => (
+    <button className="btn btn-sm btn-secondary">
+        <i className="fa fa-chevron-down" />
+    </button>
+);
 
 const ParametersTableRow = ({flagText}) => (
     <tr>
