@@ -1,11 +1,11 @@
 import React from 'react';
 
-import './custom.css';
-import './formula.css';
+import './styles/custom.css';
+import './styles/formula.css';
 
-import Parameters from './parameters.js';
-import Formula from './formula.js';
-import Evaluation from './evaluation.js';
+import Parameters from './components/parameters.js';
+import Formula from './components/formula.js';
+import Evaluation from './components/evaluation.js';
 
 class App extends React.Component {
     constructor() {
