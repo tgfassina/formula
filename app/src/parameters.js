@@ -43,6 +43,15 @@ const ParametersTableFooter = ({clickHandler}) => (
     </tr>
 );
 
+const ParametersTableView = ({rows, clickHandler}) => (
+    <table className="table table-bordered table-sm">
+        <tbody>
+            {rows}
+            <ParametersTableFooter clickHandler={clickHandler} />
+        </tbody>
+    </table>
+);
+
 class ParametersTable extends React.Component {
     constructor(props) {
         super(props);
@@ -56,12 +65,10 @@ class ParametersTable extends React.Component {
 
     render() {
         return (
-            <table className="table table-bordered table-sm">
-                <tbody>
-                    {this.mapTableRows()}
-                    <ParametersTableFooter clickHandler={this.props.addHandler} />
-                </tbody>
-            </table>
+            <ParametersTableView
+                rows={this.mapTableRows()}
+                clickHandler={this.props.addHandler}
+            />
         );
     }
 }
