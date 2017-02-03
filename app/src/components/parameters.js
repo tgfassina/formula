@@ -1,8 +1,8 @@
 import React from 'react';
 
-const ParameterFlag = ({flagText}) => (
+const ParameterFlag = ({variable}) => (
     <span className="badge badge-default">
-        ${flagText}
+        ${variable}
     </span>
 );
 
@@ -21,10 +21,10 @@ const ParameterOptions = () => (
     </button>
 );
 
-const ParametersTableRow = ({flagText, label}) => (
+const ParametersTableRow = ({variable, label}) => (
     <tr>
         <td className="text-right">
-            <ParameterFlag flagText={flagText} />
+            <ParameterFlag variable={variable} />
         </td>
         <td>
             <ParameterName label={label}/>
@@ -64,11 +64,11 @@ class ParametersTable extends React.Component {
     }
 
     mapTableRows() {
-        let mapper = (input, i) => (
+        let mapper = (parameter, i) => (
             <ParametersTableRow
                 key={i}
-                flagText={input.variable}
-                label={input.label}
+                variable={parameter.variable}
+                label={parameter.label}
             />
         );
         return this.props.parameters.map(mapper);
@@ -84,11 +84,11 @@ class ParametersTable extends React.Component {
     }
 }
 
-const Parameters = ({list, addHandler}) => (
+const Parameters = ({parameters, addHandler}) => (
     <div className="row">
         <div className="col">
             <h1>Choose parameters</h1>
-            <ParametersTable parameters={list} addHandler={addHandler} />
+            <ParametersTable parameters={parameters} addHandler={addHandler} />
         </div>
     </div>
 );

@@ -14,26 +14,26 @@ class App extends React.Component {
         super();
         this.addParameter = this.addParameter.bind(this);
         this.updateValue = this.updateValue.bind(this);
-        this.createInput = this.createInput.bind(this);
+        this.createParameter = this.createParameter.bind(this);
 
         this.parameterCount = 0;
 
-        this.state = {inputList: [this.createInput('natural')]};
+        this.state = {parameters: [this.createParameter('natural')]};
     }
 
     addParameter() {
-        let newInput = this.createInput('artificial');
-        let newList = this.state.inputList.concat([newInput]);
-        this.setState({inputList: newList});
+        let newInput = this.createParameter('artificial');
+        let newList = this.state.parameters.concat([newInput]);
+        this.setState({parameters: newList});
     }
 
     updateValue(i, value) {
-        var inputs = this.state.inputList.slice();
+        var inputs = this.state.parameters.slice();
         inputs[i].value = value;
-        this.setState({inputList: inputs});
+        this.setState({parameters: inputs});
     }
 
-    createInput(label) {
+    createParameter(label) {
         this.parameterCount++;
         return new Parameter(this.parameterCount, label);
     }
@@ -42,14 +42,14 @@ class App extends React.Component {
         return (
             <div>
                 <Parameters
-                    list={this.state.inputList}
+                    parameters={this.state.parameters}
                     addHandler={this.addParameter}
                 />
                 <hr />
                 <Formula />
                 <hr />
                 <Evaluation
-                    inputs={this.state.inputList}
+                    parameters={this.state.parameters}
                     updateHandler={this.updateValue}
                 />
             </div>
