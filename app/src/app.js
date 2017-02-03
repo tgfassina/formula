@@ -1,5 +1,8 @@
 import React from 'react';
 
+import './custom.css';
+import './formula.css';
+
 import Parameters from './parameters.js';
 import Formula from './formula.js';
 import Evaluation from './evaluation.js';
