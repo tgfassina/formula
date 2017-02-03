@@ -6,8 +6,13 @@ const ParameterFlag = ({flagText}) => (
     </span>
 );
 
-const ParameterName = () => (
-    <input type="text" className="form-control form-control-sm" />
+const ParameterName = ({label}) => (
+    <input
+        type="text"
+        className="form-control form-control-sm"
+        value={label}
+        disabled
+    />
 );
 
 const ParameterOptions = () => (
@@ -16,15 +21,15 @@ const ParameterOptions = () => (
     </button>
 );
 
-const ParametersTableRow = ({flagText}) => (
+const ParametersTableRow = ({flagText, label}) => (
     <tr>
         <td className="text-right">
             <ParameterFlag flagText={flagText} />
         </td>
         <td>
-            <ParameterName />
+            <ParameterName label={label}/>
         </td>
-        <td className="text-center">
+        <td className="text-center table-row-actions">
             <ParameterOptions />
         </td>
     </tr>
@@ -59,7 +64,13 @@ class ParametersTable extends React.Component {
     }
 
     mapTableRows() {
-        let mapper = (input, i) => <ParametersTableRow key={i} flagText={input.label} />;
+        let mapper = (input, i) => (
+            <ParametersTableRow
+                key={i}
+                flagText={input.variable}
+                label={input.label}
+            />
+        );
         return this.props.parameters.map(mapper);
     }
 

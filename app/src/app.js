@@ -7,12 +7,16 @@ import Parameters from './components/parameters.js';
 import Formula from './components/formula.js';
 import Evaluation from './components/evaluation.js';
 
+import Parameter from './models/parameter.js';
+
 class App extends React.Component {
     constructor() {
         super();
         this.addParameter = this.addParameter.bind(this);
         this.updateValue = this.updateValue.bind(this);
         this.createInput = this.createInput.bind(this);
+
+        this.parameterCount = 0;
 
         this.state = {inputList: [this.createInput('natural')]};
     }
@@ -30,7 +34,8 @@ class App extends React.Component {
     }
 
     createInput(label) {
-        return {label: label, value: ''};
+        this.parameterCount++;
+        return new Parameter(this.parameterCount, label);
     }
 
     render() {
