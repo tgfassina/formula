@@ -1,13 +1,18 @@
 import React from 'react';
 
-const ParameterFlag = ({flagText}) => (
+const ParameterFlag = ({variable}) => (
     <span className="badge badge-default">
-        ${flagText}
+        ${variable}
     </span>
 );
 
-const ParameterName = () => (
-    <input type="text" className="form-control form-control-sm" />
+const ParameterName = ({label}) => (
+    <input
+        type="text"
+        className="form-control form-control-sm"
+        value={label}
+        disabled
+    />
 );
 
 const ParameterOptions = () => (
@@ -16,15 +21,15 @@ const ParameterOptions = () => (
     </button>
 );
 
-const ParametersTableRow = ({flagText}) => (
+const ParametersTableRow = ({variable, label}) => (
     <tr>
         <td className="text-right">
-            <ParameterFlag flagText={flagText} />
+            <ParameterFlag variable={variable} />
         </td>
         <td>
-            <ParameterName />
+            <ParameterName label={label}/>
         </td>
-        <td className="text-center">
+        <td className="text-center table-row-actions">
             <ParameterOptions />
         </td>
     </tr>
@@ -59,7 +64,13 @@ class ParametersTable extends React.Component {
     }
 
     mapTableRows() {
-        let mapper = (input, i) => <ParametersTableRow key={i} flagText={input.label} />;
+        let mapper = (parameter, i) => (
+            <ParametersTableRow
+                key={i}
+                variable={parameter.variable}
+                label={parameter.label}
+            />
+        );
         return this.props.parameters.map(mapper);
     }
 
@@ -73,11 +84,11 @@ class ParametersTable extends React.Component {
     }
 }
 
-const Parameters = ({list, addHandler}) => (
+const Parameters = ({parameters, addHandler}) => (
     <div className="row">
         <div className="col">
             <h1>Choose parameters</h1>
-            <ParametersTable parameters={list} addHandler={addHandler} />
+            <ParametersTable parameters={parameters} addHandler={addHandler} />
         </div>
     </div>
 );

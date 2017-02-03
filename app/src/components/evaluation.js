@@ -1,8 +1,8 @@
 import React from 'react';
 
-const EvaluationInputs = ({name, value, changeHandler}) => (
+const EvaluationInputs = ({label, value, changeHandler}) => (
     <div className="evaluation-parameter">
-        <label>{name}</label>
+        <label>{label}</label>
         <input
             type="number"
             className="form-control form-control-sm"
@@ -12,12 +12,12 @@ const EvaluationInputs = ({name, value, changeHandler}) => (
     </div>
 );
 
-const EvaluationResult = ({value}) => (
+const EvaluationResult = ({result}) => (
     <input
         type="number"
         className="form-control form-control-lg result-display"
         disabled
-        value={value}
+        value={result}
     />
 );
 
@@ -31,8 +31,8 @@ class EvaluationTester extends React.Component {
     evaluateResult() {
         // adding the values until we can use the formula
         const getInt = (string) => parseInt(string, 10) || 0;
-        let reducer = (carry, input) => carry + getInt(input.value);
-        return this.props.inputs.reduce(reducer, 0);
+        let reducer = (carry, parameter) => carry + getInt(parameter.value);
+        return this.props.parameters.reduce(reducer, 0);
     }
 
     updateValue(i, event) {
@@ -40,15 +40,15 @@ class EvaluationTester extends React.Component {
     }
 
     mapParameters() {
-        let mapper = (input, i) => (
+        let mapper = (parameter, i) => (
             <EvaluationInputs
                 key={i}
-                name={input.label}
-                value={input.value}
+                label={parameter.label}
+                value={parameter.value}
                 changeHandler={this.updateValue.bind(this, i)}
             />
         );
-        return this.props.inputs.map(mapper);
+        return this.props.parameters.map(mapper);
     }
 
     render() {
@@ -61,19 +61,19 @@ class EvaluationTester extends React.Component {
                     <i className="fa fa-arrow-right fa-2x"></i>
                 </div>
                 <div className="col-5">
-                    <EvaluationResult value={this.evaluateResult()} />
+                    <EvaluationResult result={this.evaluateResult()} />
                 </div>
             </div>
         );
     }
 }
 
-const Evaluation = ({inputs, updateHandler}) => (
+const Evaluation = ({parameters, updateHandler}) => (
     <div className="row">
         <div className="col">
             <h1>Evaluate</h1>
             <EvaluationTester
-                inputs={inputs}
+                parameters={parameters}
                 updateHandler={updateHandler}
             />
         </div>
