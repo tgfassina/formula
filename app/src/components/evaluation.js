@@ -35,17 +35,13 @@ class EvaluationTester extends React.Component {
         return this.props.parameters.reduce(reducer, 0);
     }
 
-    updateValue(i, event) {
-        this.props.updateHandler(i, event.target.value);
-    }
-
     mapParameters() {
         let mapper = (parameter, i) => (
             <EvaluationInputs
                 key={i}
                 label={parameter.label}
                 value={parameter.value}
-                changeHandler={this.updateValue.bind(this, i)}
+                changeHandler={this.props.updateHandler(i)}
             />
         );
         return this.props.parameters.map(mapper);

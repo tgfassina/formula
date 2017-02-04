@@ -29,10 +29,12 @@ class App extends React.Component {
         this.setState({parameters: newList});
     }
 
-    updateValue(i, value) {
-        var inputs = this.state.parameters.slice();
-        inputs[i].value = value;
-        this.setState({parameters: inputs});
+    updateValue(i) {
+        return (event) => {
+            var inputs = this.state.parameters.slice();
+            inputs[i].value = event.target.value;
+            this.setState({parameters: inputs});
+        };
     }
 
     createParameter(label) {
