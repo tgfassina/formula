@@ -22,12 +22,6 @@ const EvaluationResult = ({result}) => (
 );
 
 class EvaluationTester extends React.Component {
-    constructor(props) {
-        super(props);
-        this.mapParameters = this.mapParameters.bind(this);
-        this.evaluateResult = this.evaluateResult.bind(this);
-    }
-
     evaluateResult() {
         // adding the values until we can use the formula
         const getInt = (string) => parseInt(string, 10) || 0;

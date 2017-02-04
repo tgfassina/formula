@@ -58,11 +58,6 @@ const ParametersTableView = ({rows, clickHandler}) => (
 );
 
 class ParametersTable extends React.Component {
-    constructor(props) {
-        super(props);
-        this.mapTableRows = this.mapTableRows.bind(this);
-    }
-
     mapTableRows() {
         let mapper = (parameter, i) => (
             <ParametersTableRow
