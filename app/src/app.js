@@ -14,13 +14,13 @@ import Parameter from './models/parameter.js';
 class App extends React.Component {
     constructor() {
         super();
-        this.addParameter = this.addParameter.bind(this);
-        this.updateValue = this.updateValue.bind(this);
-        this.createParameter = this.createParameter.bind(this);
-
         this.parameterCount = 0;
-
         this.state = {parameters: [this.createParameter('natural')]};
+    }
+
+    createParameter(label) {
+        this.parameterCount++;
+        return new Parameter(this.parameterCount, label);
     }
 
     addParameter() {
@@ -37,24 +37,19 @@ class App extends React.Component {
         };
     }
 
-    createParameter(label) {
-        this.parameterCount++;
-        return new Parameter(this.parameterCount, label);
-    }
-
     render() {
         return (
             <div>
                 <Parameters
                     parameters={this.state.parameters}
-                    addHandler={this.addParameter}
+                    addHandler={this.addParameter.bind(this)}
                 />
                 <hr />
                 <Formula />
                 <hr />
                 <Evaluation
                     parameters={this.state.parameters}
-                    updateHandler={this.updateValue}
+                    updateHandler={this.updateValue.bind(this)}
                 />
             </div>
         );
