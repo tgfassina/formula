@@ -8,8 +8,12 @@
     "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.1.1",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "tether": "^1.4.0"
   },
   "devDependencies": {
     "fixpack": "^2.3.1",

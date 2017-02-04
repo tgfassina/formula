@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './vendor'
+
 import './styles/custom.css';
 import './styles/formula.css';
 
