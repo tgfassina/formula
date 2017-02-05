@@ -1,12 +1,13 @@
 import React from 'react';
 
+const EvaluationLabelEmpty = () => (
+    <label className="text-muted">
+        <em>Unnamed</em>
+    </label>
+);
+
 const EvaluationLabel = ({label}) => (
-    label ?
-        <label>{label}</label>
-        :
-        <label className="text-muted">
-            <em>Unnamed</em>
-        </label>
+    label ? <label>{label}</label> : <EvaluationLabelEmpty />
 );
 
 const EvaluationInputs = ({label, value, changeHandler}) => (
