@@ -56,15 +56,6 @@ const ParametersTableEmpty = () => (
     </tr>
 );
 
-const ParametersTableView = ({content, clickHandler}) => (
-    <table className="table table-bordered table-sm">
-        <tbody>
-            {content}
-            <ParametersTableFooter clickHandler={clickHandler} />
-        </tbody>
-    </table>
-);
-
 class ParametersTable extends React.Component {
     mapTableRows() {
         let mapper = (parameter, i) => (
@@ -85,10 +76,12 @@ class ParametersTable extends React.Component {
 
     render() {
         return (
-            <ParametersTableView
-                content={this.getTableContent()}
-                clickHandler={this.props.addHandler}
-            />
+            <table className="table table-bordered table-sm">
+                <tbody>
+                    {this.getTableContent()}
+                    <ParametersTableFooter clickHandler={this.props.addHandler} />
+                </tbody>
+            </table>
         );
     }
 }
