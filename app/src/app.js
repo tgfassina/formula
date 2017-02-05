@@ -29,7 +29,7 @@ class App extends React.Component {
         this.setState({parameters: newList});
     }
 
-    updateValue(i) {
+    parameterValueUpdater(i) {
         return (event) => {
             var inputs = this.state.parameters.slice();
             inputs[i].value = event.target.value;
@@ -49,7 +49,7 @@ class App extends React.Component {
                 <hr />
                 <Evaluation
                     parameters={this.state.parameters}
-                    updateHandler={this.updateValue.bind(this)}
+                    parameterValueUpdater={this.parameterValueUpdater.bind(this)}
                 />
             </div>
         );
