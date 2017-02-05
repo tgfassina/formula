@@ -6,6 +6,15 @@ const ParameterVariable = ({variable}) => (
     </span>
 );
 
+const ParameterLabel = ({label, onChange}) => (
+    <input
+        type="text"
+        className="form-control form-control-sm"
+        value={label}
+        onChange={onChange}
+    />
+);
+
 const ParameterOptions = () => (
     <div className="inline-control-group text-right">
         <label><small>Default value</small></label>
@@ -13,7 +22,7 @@ const ParameterOptions = () => (
     </div>
 );
 
-class ParameterLabel extends React.Component {
+class ParameterConfig extends React.Component {
     changeHandler(event) {
         this.props.onChange(event.target.value);
     }
@@ -21,10 +30,8 @@ class ParameterLabel extends React.Component {
     render() {
         return (
             <div>
-                <input
-                    type="text"
-                    className="form-control form-control-sm"
-                    value={this.props.label}
+                <ParameterLabel
+                    label={this.props.label}
                     onChange={this.changeHandler.bind(this)}
                 />
 
@@ -40,7 +47,7 @@ const ParameterActions = ({toggle, expanded}) => (
     </button>
 );
 
-class ParametersTableRow extends React.Component {
+class ParameterRow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {expanded: false};
@@ -57,7 +64,7 @@ class ParametersTableRow extends React.Component {
                     <ParameterVariable variable={this.props.variable} />
                 </td>
                 <td>
-                    <ParameterLabel
+                    <ParameterConfig
                         label={this.props.label}
                         onChange={this.props.onLabelChange}
                         expanded={this.state.expanded}
@@ -98,7 +105,7 @@ const ParametersTableEmpty = () => (
 class ParametersTable extends React.Component {
     mapTableRows() {
         let mapper = (parameter, i) => (
-            <ParametersTableRow
+            <ParameterRow
                 key={i}
                 variable={parameter.variable}
                 label={parameter.label}
