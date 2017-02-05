@@ -13,18 +13,26 @@ const ParameterOptions = () => (
     </div>
 );
 
-const ParameterLabel = ({label, changeHandler, expanded}) => (
-    <div>
-        <input
-            type="text"
-            className="form-control form-control-sm"
-            value={label}
-            onChange={changeHandler}
-        />
+class ParameterLabel extends React.Component {
+    changeHandler(event) {
+        this.props.changeHandler(event.target.value);
+    }
 
-        {expanded ? <ParameterOptions /> : null}
-    </div>
-);
+    render() {
+        return (
+            <div>
+                <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    value={this.props.label}
+                    onChange={this.changeHandler.bind(this)}
+                />
+
+                {this.props.expanded ? <ParameterOptions /> : null}
+            </div>
+        );
+    }
+};
 
 const ParameterActions = ({toggle, expanded}) => (
     <button className="btn btn-sm btn-secondary" onClick={toggle}>

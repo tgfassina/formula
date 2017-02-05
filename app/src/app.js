@@ -29,19 +29,13 @@ class App extends React.Component {
         this.setState({parameters: newList});
     }
 
-    parameterLabelUpdater(key) {
-        return (event) => {
-            var inputs = this.state.parameters.slice();
-            inputs[key].label = event.target.value;
-            this.setState({parameters: inputs});
-        }
-    }
-
-    parameterValueUpdater(key) {
-        return (event) => {
-            var inputs = this.state.parameters.slice();
-            inputs[key].value = event.target.value;
-            this.setState({parameters: inputs});
+    parameterUpdater(attr) {
+        return (key) => {
+            return (value) => {
+                var inputs = this.state.parameters.slice();
+                inputs[key][attr] = value;
+                this.setState({parameters: inputs});
+            }
         };
     }
 

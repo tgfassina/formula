@@ -10,17 +10,25 @@ const EvaluationLabel = ({label}) => (
     label ? <label>{label}</label> : <EvaluationLabelEmpty />
 );
 
-const EvaluationParameter = ({label, value, changeHandler}) => (
-    <div className="evaluation-parameter">
-        <EvaluationLabel label={label} />
-        <input
-            type="number"
-            className="form-control form-control-sm parameter-input"
-            value={value}
-            onChange={changeHandler}
-        />
-    </div>
-);
+class EvaluationParameter extends React.Component {
+    changeHandler(event) {
+        this.props.changeHandler(event.target.value);
+    }
+
+    render() {
+        return (
+            <div className="evaluation-parameter">
+                <EvaluationLabel label={this.props.label} />
+                <input
+                    type="number"
+                    className="form-control form-control-sm parameter-input"
+                    value={this.props.value}
+                    onChange={this.changeHandler.bind(this)}
+                />
+            </div>
+        );
+    }
+}
 
 const EvaluationResult = ({result}) => (
     <input
