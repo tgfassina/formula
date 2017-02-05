@@ -31,7 +31,7 @@ class ParameterConfig extends React.Component {
         return (
             <div>
                 <ParameterLabel
-                    label={this.props.label}
+                    label={this.props.parameter.label}
                     onChange={this.changeHandler.bind(this)}
                 />
 
@@ -61,11 +61,11 @@ class ParameterRow extends React.Component {
         return (
             <tr>
                 <td className="text-right">
-                    <ParameterVariable variable={this.props.variable} />
+                    <ParameterVariable variable={this.props.parameter.variable} />
                 </td>
                 <td>
                     <ParameterConfig
-                        label={this.props.label}
+                        parameter={this.props.parameter}
                         onChange={this.props.onLabelChange}
                         expanded={this.state.expanded}
                     />
@@ -107,8 +107,7 @@ class ParametersTable extends React.Component {
         let mapper = (parameter, i) => (
             <ParameterRow
                 key={i}
-                variable={parameter.variable}
-                label={parameter.label}
+                parameter={parameter}
                 onLabelChange={this.props.onLabelsChange(i)}
             />
         );
