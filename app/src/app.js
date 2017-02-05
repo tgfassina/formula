@@ -15,7 +15,7 @@ class App extends React.Component {
     constructor() {
         super();
         this.parameterCount = 0;
-        this.state = {parameters: [this.createParameter()]};
+        this.state = {parameters: []};
     }
 
     createParameter() {

@@ -10,7 +10,7 @@ const EvaluationLabel = ({label}) => (
     label ? <label>{label}</label> : <EvaluationLabelEmpty />
 );
 
-const EvaluationInputs = ({label, value, changeHandler}) => (
+const EvaluationParameter = ({label, value, changeHandler}) => (
     <div className="evaluation-parameter">
         <EvaluationLabel label={label} />
         <input
@@ -31,6 +31,12 @@ const EvaluationResult = ({result}) => (
     />
 );
 
+const EvaluationNoParameters = () => (
+    <div className="text-right text-muted">
+        <em>No parameters</em>
+    </div>
+);
+
 class EvaluationTester extends React.Component {
     evaluateResult() {
         // adding the values until we can use the formula
@@ -41,7 +47,7 @@ class EvaluationTester extends React.Component {
 
     mapParameters() {
         let mapper = (parameter, i) => (
-            <EvaluationInputs
+            <EvaluationParameter
                 key={i}
                 label={parameter.label}
                 value={parameter.value}
@@ -51,11 +57,16 @@ class EvaluationTester extends React.Component {
         return this.props.parameters.map(mapper);
     }
 
+    getParametersData() {
+        let parameters = this.mapParameters();
+        return parameters.length ? parameters : <EvaluationNoParameters />
+    }
+
     render() {
         return (
             <div className="row align-items-center">
                 <div className="col-5">
-                    {this.mapParameters()}
+                    {this.getParametersData()}
                 </div>
                 <div className="col-2 text-center">
                     <i className="fa fa-arrow-right fa-2x"></i>
