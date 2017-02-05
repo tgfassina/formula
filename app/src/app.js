@@ -45,14 +45,14 @@ class App extends React.Component {
                 <Parameters
                     parameters={this.state.parameters}
                     addHandler={this.addParameter.bind(this)}
-                    parameterLabelUpdater={this.parameterLabelUpdater.bind(this)}
+                    onLabelsChange={this.parameterUpdater('label').bind(this)}
                 />
                 <hr />
                 <Formula />
                 <hr />
                 <Evaluation
                     parameters={this.state.parameters}
-                    parameterValueUpdater={this.parameterValueUpdater.bind(this)}
+                    onValuesChange={this.parameterUpdater('value').bind(this)}
                 />
             </div>
         );

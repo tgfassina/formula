@@ -15,7 +15,7 @@ const ParameterOptions = () => (
 
 class ParameterLabel extends React.Component {
     changeHandler(event) {
-        this.props.changeHandler(event.target.value);
+        this.props.onChange(event.target.value);
     }
 
     render() {
@@ -59,7 +59,7 @@ class ParametersTableRow extends React.Component {
                 <td>
                     <ParameterLabel
                         label={this.props.label}
-                        changeHandler={this.props.labelUpdater}
+                        onChange={this.props.onLabelChange}
                         expanded={this.state.expanded}
                     />
                 </td>
@@ -102,7 +102,7 @@ class ParametersTable extends React.Component {
                 key={i}
                 variable={parameter.variable}
                 label={parameter.label}
-                labelUpdater={this.props.labelUpdater(i)}
+                onLabelChange={this.props.onLabelsChange(i)}
             />
         );
         return this.props.parameters.map(mapper);
@@ -125,14 +125,14 @@ class ParametersTable extends React.Component {
     }
 }
 
-const Parameters = ({parameters, addHandler, parameterLabelUpdater}) => (
+const Parameters = ({parameters, addHandler, onLabelsChange}) => (
     <div className="row">
         <div className="col">
             <h1>Choose parameters</h1>
             <ParametersTable
                 parameters={parameters}
                 addHandler={addHandler}
-                labelUpdater={parameterLabelUpdater}
+                onLabelsChange={onLabelsChange}
             />
         </div>
     </div>
