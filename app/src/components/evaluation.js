@@ -10,17 +10,26 @@ const EvaluationLabel = ({label}) => (
     label ? <label>{label}</label> : <EvaluationLabelEmpty />
 );
 
-const EvaluationParameter = ({label, value, changeHandler}) => (
-    <div className="evaluation-parameter">
-        <EvaluationLabel label={label} />
-        <input
-            type="number"
-            className="form-control form-control-sm parameter-input"
-            value={value}
-            onChange={changeHandler}
-        />
-    </div>
-);
+class EvaluationParameter extends React.Component {
+    changeHandler(event) {
+        this.props.onChange(event.target.value);
+    }
+
+    render() {
+        return (
+            <div className="evaluation-parameter">
+                <EvaluationLabel label={this.props.parameter.label} />
+                <input
+                    type="number"
+                    className="form-control form-control-sm parameter-input"
+                    value={this.props.parameter.value}
+                    placeholder={this.props.parameter.defaultValue}
+                    onChange={this.changeHandler.bind(this)}
+                />
+            </div>
+        );
+    }
+}
 
 const EvaluationResult = ({result}) => (
     <input
@@ -40,8 +49,7 @@ const EvaluationNoParameters = () => (
 class EvaluationTester extends React.Component {
     evaluateResult() {
         // adding the values until we can use the formula
-        const getInt = (string) => parseInt(string, 10) || 0;
-        let reducer = (carry, parameter) => carry + getInt(parameter.value);
+        let reducer = (carry, parameter) => carry + parameter.getValue();
         return this.props.parameters.reduce(reducer, 0);
     }
 
@@ -49,9 +57,8 @@ class EvaluationTester extends React.Component {
         let mapper = (parameter, i) => (
             <EvaluationParameter
                 key={i}
-                label={parameter.label}
-                value={parameter.value}
-                changeHandler={this.props.valueUpdater(i)}
+                parameter={parameter}
+                onChange={this.props.parametersUpdater(i)('value')}
             />
         );
         return this.props.parameters.map(mapper);
@@ -79,13 +86,13 @@ class EvaluationTester extends React.Component {
     }
 }
 
-const Evaluation = ({parameters, parameterValueUpdater}) => (
+const Evaluation = ({parameters, parametersUpdater}) => (
     <div className="row">
         <div className="col">
             <h1>Evaluate</h1>
             <EvaluationTester
                 parameters={parameters}
-                valueUpdater={parameterValueUpdater}
+                parametersUpdater={parametersUpdater}
             />
         </div>
     </div>

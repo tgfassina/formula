@@ -5,3 +5,13 @@ body {
 h1 {
     font-size: 1.5rem;
 }
+
+.inline-control-group {
+    margin: 10px 0 0;
+}
+
+.inline-control-group .form-control {
+    margin-left: 8px;
+    width: 80px;
+    display: inline-block;
+}
