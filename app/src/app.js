@@ -29,11 +29,11 @@ class App extends React.Component {
         this.setState({parameters: newList});
     }
 
-    parameterUpdater(attr) {
-        return (key) => {
+    parametersUpdater(key) {
+        return (attribute) => {
             return (value) => {
                 var inputs = this.state.parameters.slice();
-                inputs[key][attr] = value;
+                inputs[key][attribute] = value;
                 this.setState({parameters: inputs});
             }
         };
@@ -44,15 +44,15 @@ class App extends React.Component {
             <div>
                 <Parameters
                     parameters={this.state.parameters}
+                    parametersUpdater={this.parametersUpdater.bind(this)}
                     addHandler={this.addParameter.bind(this)}
-                    onLabelsChange={this.parameterUpdater('label').bind(this)}
                 />
                 <hr />
                 <Formula />
                 <hr />
                 <Evaluation
                     parameters={this.state.parameters}
-                    onValuesChange={this.parameterUpdater('value').bind(this)}
+                    parametersUpdater={this.parametersUpdater.bind(this)}
                 />
             </div>
         );
