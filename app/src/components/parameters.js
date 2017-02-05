@@ -6,36 +6,65 @@ const ParameterVariable = ({variable}) => (
     </span>
 );
 
-const ParameterLabel = ({label, onChange}) => (
-    <input
-        type="text"
-        className="form-control form-control-sm"
-        value={label}
-        onChange={onChange}
+class ParameterLabel extends React.Component {
+    changeHandler(event) {
+        this.props.onChange(event.target.value);
+    }
+
+    render() {
+        return (
+            <input
+                type="text"
+                className="form-control form-control-sm"
+                value={this.props.label}
+                onChange={this.changeHandler.bind(this)}
+            />
+        );
+    }
+}
+
+class ParameterDefaultValue extends React.Component {
+    changeHandler(event) {
+        this.props.onChange(event.target.value);
+    }
+
+    render() {
+        return (
+            <div className="inline-control-group text-right">
+                <label><small>Default value</small></label>
+                <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    value={this.props.defaultValue}
+                    onChange={this.changeHandler.bind(this)}
+                />
+            </div>
+        );
+    }
+}
+
+const ParameterOptions = ({parameter, parameterUpdater}) => (
+    <ParameterDefaultValue
+        defaultValue={parameter.defaultValue}
+        onChange={parameterUpdater('defaultValue')}
     />
 );
 
-const ParameterOptions = () => (
-    <div className="inline-control-group text-right">
-        <label><small>Default value</small></label>
-        <input className="form-control form-control-sm" />
-    </div>
-);
-
 class ParameterConfig extends React.Component {
-    changeHandler(event) {
-        this.props.parameterUpdater('label')(event.target.value);
-    }
-
     render() {
         return (
             <div>
                 <ParameterLabel
                     label={this.props.parameter.label}
-                    onChange={this.changeHandler.bind(this)}
+                    onChange={this.props.parameterUpdater('label')}
                 />
 
-                {this.props.expanded ? <ParameterOptions /> : null}
+                {this.props.expanded ?
+                    <ParameterOptions
+                        parameter={this.props.parameter}
+                        parameterUpdater={this.props.parameterUpdater}
+                    />
+                : null}
             </div>
         );
     }

@@ -18,11 +18,12 @@ class EvaluationParameter extends React.Component {
     render() {
         return (
             <div className="evaluation-parameter">
-                <EvaluationLabel label={this.props.label} />
+                <EvaluationLabel label={this.props.parameter.label} />
                 <input
                     type="number"
                     className="form-control form-control-sm parameter-input"
-                    value={this.props.value}
+                    value={this.props.parameter.value}
+                    placeholder={this.props.parameter.defaultValue}
                     onChange={this.changeHandler.bind(this)}
                 />
             </div>
@@ -48,8 +49,7 @@ const EvaluationNoParameters = () => (
 class EvaluationTester extends React.Component {
     evaluateResult() {
         // adding the values until we can use the formula
-        const getInt = (string) => parseInt(string, 10) || 0;
-        let reducer = (carry, parameter) => carry + getInt(parameter.value);
+        let reducer = (carry, parameter) => carry + parameter.getValue();
         return this.props.parameters.reduce(reducer, 0);
     }
 
@@ -57,8 +57,7 @@ class EvaluationTester extends React.Component {
         let mapper = (parameter, i) => (
             <EvaluationParameter
                 key={i}
-                label={parameter.label}
-                value={parameter.value}
+                parameter={parameter}
                 onChange={this.props.parametersUpdater(i)('value')}
             />
         );
