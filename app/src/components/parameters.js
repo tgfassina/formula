@@ -1,17 +1,17 @@
 import React from 'react';
 
-const ParameterFlag = ({variable}) => (
+const ParameterVariable = ({variable}) => (
     <span className="badge badge-default">
         ${variable}
     </span>
 );
 
-const ParameterName = ({label}) => (
+const ParameterName = ({label, changeHandler}) => (
     <input
         type="text"
         className="form-control form-control-sm"
         value={label}
-        disabled
+        onChange={changeHandler}
     />
 );
 
@@ -21,13 +21,13 @@ const ParameterOptions = () => (
     </button>
 );
 
-const ParametersTableRow = ({variable, label}) => (
+const ParametersTableRow = ({variable, label, labelUpdater}) => (
     <tr>
         <td className="text-right">
-            <ParameterFlag variable={variable} />
+            <ParameterVariable variable={variable} />
         </td>
         <td>
-            <ParameterName label={label}/>
+            <ParameterName label={label} changeHandler={labelUpdater} />
         </td>
         <td className="text-center table-row-actions">
             <ParameterOptions />
@@ -58,17 +58,13 @@ const ParametersTableView = ({rows, clickHandler}) => (
 );
 
 class ParametersTable extends React.Component {
-    constructor(props) {
-        super(props);
-        this.mapTableRows = this.mapTableRows.bind(this);
-    }
-
     mapTableRows() {
         let mapper = (parameter, i) => (
             <ParametersTableRow
                 key={i}
                 variable={parameter.variable}
                 label={parameter.label}
+                labelUpdater={this.props.labelUpdater(i)}
             />
         );
         return this.props.parameters.map(mapper);
@@ -84,11 +80,15 @@ class ParametersTable extends React.Component {
     }
 }
 
-const Parameters = ({parameters, addHandler}) => (
+const Parameters = ({parameters, addHandler, parameterLabelUpdater}) => (
     <div className="row">
         <div className="col">
             <h1>Choose parameters</h1>
-            <ParametersTable parameters={parameters} addHandler={addHandler} />
+            <ParametersTable
+                parameters={parameters}
+                addHandler={addHandler}
+                labelUpdater={parameterLabelUpdater}
+            />
         </div>
     </div>
 );

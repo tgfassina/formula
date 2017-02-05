@@ -1,11 +1,20 @@
 import React from 'react';
 
+const EvaluationLabel = ({label}) => (
+    label ?
+        <label>{label}</label>
+        :
+        <label className="text-muted">
+            <em>Unnamed</em>
+        </label>
+);
+
 const EvaluationInputs = ({label, value, changeHandler}) => (
     <div className="evaluation-parameter">
-        <label>{label}</label>
+        <EvaluationLabel label={label} />
         <input
             type="number"
-            className="form-control form-control-sm"
+            className="form-control form-control-sm parameter-input"
             value={value}
             onChange={changeHandler}
         />
@@ -22,21 +31,11 @@ const EvaluationResult = ({result}) => (
 );
 
 class EvaluationTester extends React.Component {
-    constructor(props) {
-        super(props);
-        this.mapParameters = this.mapParameters.bind(this);
-        this.evaluateResult = this.evaluateResult.bind(this);
-    }
-
     evaluateResult() {
         // adding the values until we can use the formula
         const getInt = (string) => parseInt(string, 10) || 0;
         let reducer = (carry, parameter) => carry + getInt(parameter.value);
         return this.props.parameters.reduce(reducer, 0);
-    }
-
-    updateValue(i, event) {
-        this.props.updateHandler(i, event.target.value);
     }
 
     mapParameters() {
@@ -45,7 +44,7 @@ class EvaluationTester extends React.Component {
                 key={i}
                 label={parameter.label}
                 value={parameter.value}
-                changeHandler={this.updateValue.bind(this, i)}
+                changeHandler={this.props.valueUpdater(i)}
             />
         );
         return this.props.parameters.map(mapper);
@@ -68,13 +67,13 @@ class EvaluationTester extends React.Component {
     }
 }
 
-const Evaluation = ({parameters, updateHandler}) => (
+const Evaluation = ({parameters, parameterValueUpdater}) => (
     <div className="row">
         <div className="col">
             <h1>Evaluate</h1>
             <EvaluationTester
                 parameters={parameters}
-                updateHandler={updateHandler}
+                valueUpdater={parameterValueUpdater}
             />
         </div>
     </div>
