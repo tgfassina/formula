@@ -6,7 +6,7 @@ const ParameterVariable = ({variable}) => (
     </span>
 );
 
-const ParameterName = ({label, changeHandler}) => (
+const ParameterLabel = ({label, changeHandler}) => (
     <input
         type="text"
         className="form-control form-control-sm"
@@ -27,7 +27,7 @@ const ParametersTableRow = ({variable, label, labelUpdater}) => (
             <ParameterVariable variable={variable} />
         </td>
         <td>
-            <ParameterName label={label} changeHandler={labelUpdater} />
+            <ParameterLabel label={label} changeHandler={labelUpdater} />
         </td>
         <td className="text-center table-row-actions">
             <ParameterOptions />
