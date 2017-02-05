@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ParameterFlag = ({variable}) => (
+const ParameterVariable = ({variable}) => (
     <span className="badge badge-default">
         ${variable}
     </span>
@@ -24,7 +24,7 @@ const ParameterOptions = () => (
 const ParametersTableRow = ({variable, label, labelUpdater}) => (
     <tr>
         <td className="text-right">
-            <ParameterFlag variable={variable} />
+            <ParameterVariable variable={variable} />
         </td>
         <td>
             <ParameterName label={label} changeHandler={labelUpdater} />

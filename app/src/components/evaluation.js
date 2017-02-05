@@ -1,11 +1,20 @@
 import React from 'react';
 
+const EvaluationLabel = ({label}) => (
+    label ?
+        <label>{label}</label>
+        :
+        <label className="text-muted">
+            <em>Unnamed</em>
+        </label>
+);
+
 const EvaluationInputs = ({label, value, changeHandler}) => (
     <div className="evaluation-parameter">
-        <label>{label}</label>
+        <EvaluationLabel label={label} />
         <input
             type="number"
-            className="form-control form-control-sm"
+            className="form-control form-control-sm parameter-input"
             value={value}
             onChange={changeHandler}
         />

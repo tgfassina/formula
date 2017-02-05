@@ -1,7 +1,7 @@
 class Parameter {
-    constructor(variable, label) {
+    constructor(variable) {
         this.variable = variable;
-        this.label = label;
+        this.label = '';
         this.value = '';
     }
 }

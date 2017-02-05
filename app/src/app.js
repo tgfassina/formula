@@ -15,16 +15,16 @@ class App extends React.Component {
     constructor() {
         super();
         this.parameterCount = 0;
-        this.state = {parameters: [this.createParameter('natural')]};
+        this.state = {parameters: [this.createParameter()]};
     }
 
-    createParameter(label) {
+    createParameter() {
         this.parameterCount++;
-        return new Parameter(this.parameterCount, label);
+        return new Parameter(this.parameterCount);
     }
 
     addParameter() {
-        let newInput = this.createParameter('artificial');
+        let newInput = this.createParameter();
         let newList = this.state.parameters.concat([newInput]);
         this.setState({parameters: newList});
     }
