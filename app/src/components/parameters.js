@@ -6,34 +6,65 @@ const ParameterVariable = ({variable}) => (
     </span>
 );
 
-const ParameterLabel = ({label, changeHandler}) => (
-    <input
-        type="text"
-        className="form-control form-control-sm"
-        value={label}
-        onChange={changeHandler}
-    />
+const ParameterOptions = () => (
+    <div className="inline-control-group text-right">
+        <label><small>Default value</small></label>
+        <input className="form-control form-control-sm" />
+    </div>
 );
 
-const ParameterOptions = () => (
-    <button className="btn btn-sm btn-secondary">
-        <i className="fa fa-chevron-down" />
+const ParameterLabel = ({label, changeHandler, expanded}) => (
+    <div>
+        <input
+            type="text"
+            className="form-control form-control-sm"
+            value={label}
+            onChange={changeHandler}
+        />
+
+        {expanded ? <ParameterOptions /> : null}
+    </div>
+);
+
+const ParameterActions = ({toggle, expanded}) => (
+    <button className="btn btn-sm btn-secondary" onClick={toggle}>
+        {expanded ? <i className="fa fa-chevron-up" /> : <i className="fa fa-chevron-down" />}
     </button>
 );
 
-const ParametersTableRow = ({variable, label, labelUpdater}) => (
-    <tr>
-        <td className="text-right">
-            <ParameterVariable variable={variable} />
-        </td>
-        <td>
-            <ParameterLabel label={label} changeHandler={labelUpdater} />
-        </td>
-        <td className="text-center table-row-actions">
-            <ParameterOptions />
-        </td>
-    </tr>
-);
+class ParametersTableRow extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {expanded: false};
+    }
+
+    toggleOptions() {
+        this.setState({expanded: !this.state.expanded});
+    }
+
+    render() {
+        return (
+            <tr>
+                <td className="text-right">
+                    <ParameterVariable variable={this.props.variable} />
+                </td>
+                <td>
+                    <ParameterLabel
+                        label={this.props.label}
+                        changeHandler={this.props.labelUpdater}
+                        expanded={this.state.expanded}
+                    />
+                </td>
+                <td className="text-center table-row-actions">
+                    <ParameterActions
+                        toggle={this.toggleOptions.bind(this)}
+                        expanded={this.state.expanded}
+                    />
+                </td>
+            </tr>
+        );
+    }
+}
 
 const ParametersTableFooter = ({clickHandler}) => (
     <tr>
