@@ -29,10 +29,18 @@ class App extends React.Component {
         this.setState({parameters: newList});
     }
 
-    parameterValueUpdater(i) {
+    parameterLabelUpdater(key) {
         return (event) => {
             var inputs = this.state.parameters.slice();
-            inputs[i].value = event.target.value;
+            inputs[key].label = event.target.value;
+            this.setState({parameters: inputs});
+        }
+    }
+
+    parameterValueUpdater(key) {
+        return (event) => {
+            var inputs = this.state.parameters.slice();
+            inputs[key].value = event.target.value;
             this.setState({parameters: inputs});
         };
     }
@@ -43,6 +51,7 @@ class App extends React.Component {
                 <Parameters
                     parameters={this.state.parameters}
                     addHandler={this.addParameter.bind(this)}
+                    parameterLabelUpdater={this.parameterLabelUpdater.bind(this)}
                 />
                 <hr />
                 <Formula />
