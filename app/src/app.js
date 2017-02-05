@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './vendor'
+import './vendor/index.js'
 
 import './styles/custom.css';
 import './styles/formula.css';
