@@ -60,10 +60,12 @@ class ParameterConfig extends React.Component {
                 />
 
                 {this.props.expanded ?
-                    <ParameterOptions
-                        parameter={this.props.parameter}
-                        parameterUpdater={this.props.parameterUpdater}
-                    />
+                    <div className="parameter-extra">
+                        <ParameterOptions
+                            parameter={this.props.parameter}
+                            parameterUpdater={this.props.parameterUpdater}
+                        />
+                    </div>
                 : null}
             </div>
         );
@@ -71,9 +73,22 @@ class ParameterConfig extends React.Component {
 };
 
 const ParameterActions = ({toggle, expanded}) => (
-    <button className="btn btn-sm btn-secondary" onClick={toggle}>
-        {expanded ? <i className="fa fa-chevron-up" /> : <i className="fa fa-chevron-down" />}
-    </button>
+    <div>
+        <button className="btn btn-sm btn-block btn-secondary" onClick={toggle}>
+            {expanded ?
+                <i className="fa fa-chevron-up" />
+                :
+                <i className="fa fa-chevron-down" />
+            }
+        </button>
+        {expanded ?
+            <div className="parameter-extra">
+                <button className="btn btn-sm btn-block btn-secondary">
+                    <i className="fa fa-trash-o" />
+                </button>
+            </div>
+        : null}
+    </div>
 );
 
 class ParameterRow extends React.Component {
