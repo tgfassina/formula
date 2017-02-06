@@ -11,12 +11,14 @@ import Evaluation from './components/evaluation.js';
 
 import ParameterModel from './models/parameter.js';
 
-
 class App extends React.Component {
     constructor() {
         super();
         this.parameterCount = 0;
-        this.state = {parameters: []};
+        this.state = {
+            parameters: [],
+            formula: ''
+        };
     }
 
     createParameter() {
@@ -48,6 +50,10 @@ class App extends React.Component {
         }
     }
 
+    updateFormula(newFormula) {
+        this.setState({formula: newFormula});
+    }
+
     render() {
         return (
             <div>
@@ -60,11 +66,13 @@ class App extends React.Component {
                 <hr />
                 <Formula
                     parameters={this.state.parameters}
+                    onUpdate={this.updateFormula.bind(this)}
                 />
                 <hr />
                 <Evaluation
                     parameters={this.state.parameters}
                     parametersUpdater={this.parametersUpdater.bind(this)}
+                    formula={this.state.formula}
                 />
             </div>
         );

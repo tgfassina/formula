@@ -1,13 +1,21 @@
 import React from 'react';
 
-const FormulaInput = ({placeholder}) => (
-    <input
-        type="text"
-        className="form-control"
-        value={placeholder}
-        disabled
-    />
-);
+class FormulaInput extends React.Component {
+    handleChange(event) {
+        this.props.onChange(event.target.value);
+    }
+
+    render() {
+        return (
+            <input
+                type="text"
+                className="form-control"
+                placeholder={this.props.placeholder}
+                onChange={this.handleChange.bind(this)}
+            />
+        );
+    }
+}
 
 const FormulaPreview = () => (
     <div className="card formula-display">
@@ -30,6 +38,7 @@ class Formula extends React.Component {
                     <h1>Write formula</h1>
                     <FormulaInput
                         placeholder={this.getPlaceholder()}
+                        onChange={this.props.onUpdate}
                     />
                     {false ? <FormulaPreview /> : null}
                 </div>
