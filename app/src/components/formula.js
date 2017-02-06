@@ -4,7 +4,8 @@ const FormulaInput = ({placeholder}) => (
     <input
         type="text"
         className="form-control"
-        placeholder={placeholder}
+        value={placeholder}
+        disabled
     />
 );
 
@@ -30,7 +31,7 @@ class Formula extends React.Component {
                     <FormulaInput
                         placeholder={this.getPlaceholder()}
                     />
-                    <FormulaPreview />
+                    {false ? <FormulaPreview /> : null}
                 </div>
             </div>
         );
