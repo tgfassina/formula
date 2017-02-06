@@ -40,12 +40,21 @@ class App extends React.Component {
         };
     }
 
+    parametersDeleter(key) {
+        return() => {
+            var inputs = this.state.parameters.slice();
+            inputs.splice(key, 1);
+            this.setState({parameters: inputs});
+        }
+    }
+
     render() {
         return (
             <div>
                 <Parameters
                     parameters={this.state.parameters}
                     parametersUpdater={this.parametersUpdater.bind(this)}
+                    parametersDeleter={this.parametersDeleter.bind(this)}
                     addHandler={this.addParameter.bind(this)}
                 />
                 <hr />

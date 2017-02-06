@@ -27,9 +27,10 @@ class ParametersTable extends React.Component {
     mapTableRows() {
         let mapper = (parameter, i) => (
             <ParameterRow
-                key={i}
+                key={parameter.variable}
                 parameter={parameter}
                 parameterUpdater={this.props.parametersUpdater(i)}
+                parameterDeleter={this.props.parametersDeleter(i)}
             />
         );
         return this.props.parameters.map(mapper);
@@ -52,14 +53,15 @@ class ParametersTable extends React.Component {
     }
 }
 
-const Parameters = ({parameters, parametersUpdater, addHandler}) => (
+const Parameters = ({parameters, parametersUpdater, parametersDeleter, addHandler}) => (
     <div className="row">
         <div className="col">
             <h1>Choose parameters</h1>
             <ParametersTable
                 parameters={parameters}
-                addHandler={addHandler}
                 parametersUpdater={parametersUpdater}
+                parametersDeleter={parametersDeleter}
+                addHandler={addHandler}
             />
         </div>
     </div>

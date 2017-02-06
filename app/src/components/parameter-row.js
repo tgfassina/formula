@@ -72,24 +72,42 @@ class ParameterConfig extends React.Component {
     }
 };
 
-const ParameterActions = ({toggle, expanded}) => (
-    <div>
-        <button className="btn btn-sm btn-block btn-secondary" onClick={toggle}>
-            {expanded ?
-                <i className="fa fa-chevron-up" />
-                :
-                <i className="fa fa-chevron-down" />
-            }
-        </button>
-        {expanded ?
-            <div className="parameter-extra">
-                <button className="btn btn-sm btn-block btn-secondary">
-                    <i className="fa fa-trash-o" />
+class ParameterActions extends React.Component {
+    handleToggle() {
+        this.props.onToggle();
+    }
+
+    handleDelete() {
+        this.props.onDelete();
+    }
+
+    render() {
+        return (
+            <div>
+                <button
+                    className="btn btn-sm btn-block btn-secondary"
+                    onClick={this.handleToggle.bind(this)}
+                >
+                    {this.props.expanded ?
+                        <i className="fa fa-chevron-up" />
+                        :
+                        <i className="fa fa-chevron-down" />
+                    }
                 </button>
+                {this.props.expanded ?
+                    <div className="parameter-extra">
+                        <button
+                            className="btn btn-sm btn-block btn-secondary"
+                            onClick={this.handleDelete.bind(this)}
+                        >
+                            <i className="fa fa-trash-o" />
+                        </button>
+                    </div>
+                : null}
             </div>
-        : null}
-    </div>
-);
+        );
+    }
+}
 
 class ParameterRow extends React.Component {
     constructor(props) {
@@ -116,8 +134,9 @@ class ParameterRow extends React.Component {
                 </td>
                 <td className="text-center table-row-actions">
                     <ParameterActions
-                        toggle={this.toggleOptions.bind(this)}
                         expanded={this.state.expanded}
+                        onToggle={this.toggleOptions.bind(this)}
+                        onDelete={this.props.parameterDeleter}
                     />
                 </td>
             </tr>
