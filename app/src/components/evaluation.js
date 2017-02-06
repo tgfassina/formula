@@ -1,5 +1,7 @@
 import React from 'react';
 
+import math from 'mathjs/index.js';
+
 const EvaluationLabelEmpty = () => (
     <label className="text-muted">
         <em>Unnamed</em>
@@ -47,10 +49,30 @@ const EvaluationNoParameters = () => (
 );
 
 class EvaluationTester extends React.Component {
+    getPlaceholderFormula() {
+        let mapper = (parameter) => (parameter.variable);
+        return this.props.parameters.map(mapper).join(' + ');
+    }
+
     evaluateResult() {
-        // adding the values until we can use the formula
-        let reducer = (carry, parameter) => carry + parameter.getValue();
-        return this.props.parameters.reduce(reducer, 0);
+        let expression = this.props.formula.length ?
+            this.props.formula
+            :
+            this.getPlaceholderFormula();
+
+        let scope = this.props.parameters.reduce((carry, param) => {
+            carry[param.variable] = param.getValue();
+            return carry;
+        }, {});
+
+        try {
+            let result = math.eval(expression, scope);
+            return isNaN(result) ? '' : result;
+        }
+        catch (error) {
+            return '';
+        }
+
     }
 
     mapParameters() {
@@ -86,13 +108,14 @@ class EvaluationTester extends React.Component {
     }
 }
 
-const Evaluation = ({parameters, parametersUpdater}) => (
+const Evaluation = ({parameters, parametersUpdater, formula}) => (
     <div className="row">
         <div className="col">
             <h1>Evaluate</h1>
             <EvaluationTester
                 parameters={parameters}
                 parametersUpdater={parametersUpdater}
+                formula={formula}
             />
         </div>
     </div>

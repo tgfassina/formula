@@ -2,6 +2,10 @@
     width: 1%;
 }
 
+.parameter-extra {
+    margin-top: 16px;
+}
+
 .empty-table-message {
     font-size: 18px;
 }

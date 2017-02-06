@@ -1,4 +1,4 @@
-class Parameter {
+class ParameterModel {
     constructor(variable) {
         this.variable = variable;
         this.label = '';
@@ -14,4 +14,4 @@ class Parameter {
     }
 }
 
-export default Parameter;
+export default ParameterModel;
