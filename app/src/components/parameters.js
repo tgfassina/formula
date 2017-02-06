@@ -2,7 +2,7 @@ import React from 'react';
 
 const ParameterVariable = ({variable}) => (
     <span className="badge badge-default">
-        ${variable}
+        {variable}
     </span>
 );
 

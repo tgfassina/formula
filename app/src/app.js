@@ -9,7 +9,8 @@ import Parameters from './components/parameters.js';
 import Formula from './components/formula.js';
 import Evaluation from './components/evaluation.js';
 
-import Parameter from './models/parameter.js';
+import ParameterModel from './models/parameter.js';
+
 
 class App extends React.Component {
     constructor() {
@@ -20,7 +21,7 @@ class App extends React.Component {
 
     createParameter() {
         this.parameterCount++;
-        return new Parameter(this.parameterCount);
+        return new ParameterModel('X'+this.parameterCount);
     }
 
     addParameter() {
@@ -48,7 +49,9 @@ class App extends React.Component {
                     addHandler={this.addParameter.bind(this)}
                 />
                 <hr />
-                <Formula />
+                <Formula
+                    parameters={this.state.parameters}
+                />
                 <hr />
                 <Evaluation
                     parameters={this.state.parameters}
