@@ -25,12 +25,14 @@ class Formula extends React.Component {
 
     render() {
         return (
-            <div className="col-12">
-                <h1>Write formula</h1>
-                <FormulaInput
-                    placeholder={this.getPlaceholder()}
-                    onChange={this.props.onUpdate}
-                />
+            <div className="row justify-content-center">
+                <div className="col-12">
+                    <h1>Write formula</h1>
+                    <FormulaInput
+                        placeholder={this.getPlaceholder()}
+                        onChange={this.props.onUpdate}
+                    />
+                </div>
             </div>
         );
     }

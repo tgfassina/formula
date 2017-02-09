@@ -56,7 +56,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="row">
+            <div>
                 <Parameters
                     parameters={this.state.parameters}
                     parametersUpdater={this.parametersUpdater.bind(this)}
