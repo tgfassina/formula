@@ -1,5 +1,6 @@
 import React from 'react';
 
+import AppSection from './parts/app-section.js';
 import ParameterRow from './parameter-row.js';
 
 const ParametersTableFooter = ({clickHandler}) => (
@@ -54,17 +55,15 @@ class ParametersTable extends React.Component {
 }
 
 const Parameters = ({parameters, parametersUpdater, parametersDeleter, addHandler}) => (
-    <div className="row">
-        <div className="col">
-            <h1>Choose parameters</h1>
-            <ParametersTable
-                parameters={parameters}
-                parametersUpdater={parametersUpdater}
-                parametersDeleter={parametersDeleter}
-                addHandler={addHandler}
-            />
-        </div>
-    </div>
+    <AppSection>
+        <h1>Choose parameters</h1>
+        <ParametersTable
+            parameters={parameters}
+            parametersUpdater={parametersUpdater}
+            parametersDeleter={parametersDeleter}
+            addHandler={addHandler}
+        />
+    </AppSection>
 );
 
 export default Parameters;

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import AppSection from './parts/app-section.js';
 import math from 'mathjs/index.js';
 
 const EvaluationLabelEmpty = () => (
@@ -109,16 +110,14 @@ class EvaluationTester extends React.Component {
 }
 
 const Evaluation = ({parameters, parametersUpdater, formula}) => (
-    <div className="row">
-        <div className="col">
-            <h1>Evaluate</h1>
-            <EvaluationTester
-                parameters={parameters}
-                parametersUpdater={parametersUpdater}
-                formula={formula}
-            />
-        </div>
-    </div>
+    <AppSection>
+        <h1>Evaluate</h1>
+        <EvaluationTester
+            parameters={parameters}
+            parametersUpdater={parametersUpdater}
+            formula={formula}
+        />
+    </AppSection>
 );
 
 export default Evaluation;

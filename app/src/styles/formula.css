@@ -10,9 +10,8 @@
     font-size: 18px;
 }
 
-.formula-display {
-    background-color: #F3F3F3;
-    margin: 10px 10px 0;
+.formula-input {
+    margin-bottom: 1rem;
 }
 
 .result-display {

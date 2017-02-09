@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AppSection from './parts/app-section.js';
+
 class FormulaInput extends React.Component {
     handleChange(event) {
         this.props.onChange(event.target.value);
@@ -9,21 +11,13 @@ class FormulaInput extends React.Component {
         return (
             <input
                 type="text"
-                className="form-control"
+                className="form-control formula-input"
                 placeholder={this.props.placeholder}
                 onChange={this.handleChange.bind(this)}
             />
         );
     }
 }
-
-const FormulaPreview = () => (
-    <div className="card formula-display">
-        <div className="card-block text-center text-muted">
-            Human-readable version here
-        </div>
-    </div>
-);
 
 class Formula extends React.Component {
     getPlaceholder() {
@@ -33,16 +27,13 @@ class Formula extends React.Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="col">
-                    <h1>Write formula</h1>
-                    <FormulaInput
-                        placeholder={this.getPlaceholder()}
-                        onChange={this.props.onUpdate}
-                    />
-                    {false ? <FormulaPreview /> : null}
-                </div>
-            </div>
+            <AppSection>
+                <h1>Write formula</h1>
+                <FormulaInput
+                    placeholder={this.getPlaceholder()}
+                    onChange={this.props.onUpdate}
+                />
+            </AppSection>
         );
     }
 }
