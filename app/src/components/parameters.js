@@ -54,16 +54,14 @@ class ParametersTable extends React.Component {
 }
 
 const Parameters = ({parameters, parametersUpdater, parametersDeleter, addHandler}) => (
-    <div className="row">
-        <div className="col">
-            <h1>Choose parameters</h1>
-            <ParametersTable
-                parameters={parameters}
-                parametersUpdater={parametersUpdater}
-                parametersDeleter={parametersDeleter}
-                addHandler={addHandler}
-            />
-        </div>
+    <div className="col-12">
+        <h1>Choose parameters</h1>
+        <ParametersTable
+            parameters={parameters}
+            parametersUpdater={parametersUpdater}
+            parametersDeleter={parametersDeleter}
+            addHandler={addHandler}
+        />
     </div>
 );
 

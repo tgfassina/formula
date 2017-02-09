@@ -56,19 +56,17 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="row">
                 <Parameters
                     parameters={this.state.parameters}
                     parametersUpdater={this.parametersUpdater.bind(this)}
                     parametersDeleter={this.parametersDeleter.bind(this)}
                     addHandler={this.addParameter.bind(this)}
                 />
-                <hr />
                 <Formula
                     parameters={this.state.parameters}
                     onUpdate={this.updateFormula.bind(this)}
                 />
-                <hr />
                 <Evaluation
                     parameters={this.state.parameters}
                     parametersUpdater={this.parametersUpdater.bind(this)}

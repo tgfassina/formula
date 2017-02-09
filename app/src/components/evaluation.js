@@ -109,15 +109,13 @@ class EvaluationTester extends React.Component {
 }
 
 const Evaluation = ({parameters, parametersUpdater, formula}) => (
-    <div className="row">
-        <div className="col">
-            <h1>Evaluate</h1>
-            <EvaluationTester
-                parameters={parameters}
-                parametersUpdater={parametersUpdater}
-                formula={formula}
-            />
-        </div>
+    <div className="col-12">
+        <h1>Evaluate</h1>
+        <EvaluationTester
+            parameters={parameters}
+            parametersUpdater={parametersUpdater}
+            formula={formula}
+        />
     </div>
 );
 
