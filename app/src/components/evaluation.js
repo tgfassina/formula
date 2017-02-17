@@ -94,14 +94,14 @@ class EvaluationTester extends React.Component {
 
     render() {
         return (
-            <div className="row align-items-center">
-                <div className="col-5">
+            <div className="row no-gutters align-items-center">
+                <div className="col-4">
                     {this.getParametersData()}
                 </div>
                 <div className="col-2 text-center">
                     <i className="fa fa-arrow-right fa-2x"></i>
                 </div>
-                <div className="col-5">
+                <div className="col-6">
                     <EvaluationResult result={this.evaluateResult()} />
                 </div>
             </div>
