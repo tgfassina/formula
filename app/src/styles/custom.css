@@ -11,3 +11,9 @@ h1 {
     width: 80px;
     display: inline-block;
 }
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+    margin-right: -5px;
+    margin-left: 2px;
+}

@@ -9,45 +9,18 @@ import Parameters from './components/parameters.js';
 import Formula from './components/formula.js';
 import Evaluation from './components/evaluation.js';
 
-import ParameterModel from './models/parameter.js';
+import ParameterListModel from './models/parameter-list.js';
 
 class App extends React.Component {
     constructor() {
         super();
-        this.parameterCount = 0;
         this.state = {
             parameters: [],
             formula: ''
         };
-    }
 
-    createParameter() {
-        this.parameterCount++;
-        return new ParameterModel('X'+this.parameterCount);
-    }
-
-    addParameter() {
-        let newInput = this.createParameter();
-        let newList = this.state.parameters.concat([newInput]);
-        this.setState({parameters: newList});
-    }
-
-    parametersUpdater(key) {
-        return (attribute) => {
-            return (value) => {
-                var inputs = this.state.parameters.slice();
-                inputs[key][attribute] = value;
-                this.setState({parameters: inputs});
-            }
-        };
-    }
-
-    parametersDeleter(key) {
-        return() => {
-            var inputs = this.state.parameters.slice();
-            inputs.splice(key, 1);
-            this.setState({parameters: inputs});
-        }
+        const stateHandler = this.setState.bind(this);
+        this.parameters = new ParameterListModel(stateHandler, 'parameters');
     }
 
     updateFormula(newFormula) {
@@ -59,9 +32,9 @@ class App extends React.Component {
             <div>
                 <Parameters
                     parameters={this.state.parameters}
-                    parametersUpdater={this.parametersUpdater.bind(this)}
-                    parametersDeleter={this.parametersDeleter.bind(this)}
-                    addHandler={this.addParameter.bind(this)}
+                    adder={this.parameters.adder.bind(this.parameters)}
+                    updater={this.parameters.updater.bind(this.parameters)}
+                    deleter={this.parameters.deleter.bind(this.parameters)}
                 />
                 <Formula
                     parameters={this.state.parameters}
@@ -69,7 +42,7 @@ class App extends React.Component {
                 />
                 <Evaluation
                     parameters={this.state.parameters}
-                    parametersUpdater={this.parametersUpdater.bind(this)}
+                    updater={this.parameters.valueUpdater.bind(this.parameters)}
                     formula={this.state.formula}
                 />
             </div>
