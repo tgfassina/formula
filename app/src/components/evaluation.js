@@ -35,12 +35,9 @@ class EvaluationParameter extends React.Component {
 }
 
 const EvaluationResult = ({result}) => (
-    <input
-        type="number"
-        className="form-control form-control-lg result-display"
-        disabled
-        value={result}
-    />
+    <code className="result-display" title={result}>
+        {result || '–'}
+    </code>
 );
 
 const EvaluationNoParameters = () => (
@@ -51,24 +48,32 @@ const EvaluationNoParameters = () => (
 
 class EvaluationTester extends React.Component {
     getPlaceholderFormula() {
-        let mapper = (parameter) => (parameter.variable);
+        const mapper = (parameter) => (parameter.variable);
         return this.props.parameters.map(mapper).join(' + ');
     }
 
-    evaluateResult() {
-        let expression = this.props.formula.length ?
-            this.props.formula
-            :
-            this.getPlaceholderFormula();
+    getExpression() {
+        const length = this.props.formula.length;
+        const formula = this.props.formula;
+        const placeholder = this.getPlaceholderFormula();
+        return length ? formula : placeholder;
+    }
 
-        let scope = this.props.parameters.reduce((carry, param) => {
+    evaluateResult() {
+        const expression = this.getExpression();
+
+        const scope = this.props.parameters.reduce((carry, param) => {
             carry[param.variable] = param.getValue();
             return carry;
         }, {});
 
         try {
-            let result = math.eval(expression, scope);
-            return isNaN(result) ? '' : result;
+            const result = math.eval(expression, scope);
+            const formatParams = {
+                exponential: {lower: 1e-10, upper: 1e10},
+                precision: 10,
+            };
+            return isNaN(result) ? '' : math.format(result, formatParams);
         }
         catch (error) {
             return '';
