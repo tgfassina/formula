@@ -28,6 +28,13 @@ class ParameterListModel {
         };
     }
 
+    valueUpdater(key) {
+        return (value) => {
+            this.data[key].value = value;
+            this.setState();
+        };
+    }
+
     deleter(key) {
         return() => {
             this.data.splice(key, 1);

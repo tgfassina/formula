@@ -3,18 +3,26 @@ import React from 'react';
 import AppSection from './parts/app-section.js';
 import ParameterRow from './parameter-row.js';
 
-const ParametersTableFooter = ({clickHandler}) => (
-    <tr>
-        <td colSpan="3">
-            <button
-                className="btn btn-secondary btn-block btn-sm"
-                onClick={clickHandler}
-            >
-                <i className="fa fa-plus" /> Add
-            </button>
-        </td>
-    </tr>
-);
+class ParametersTableFooter extends React.Component {
+    clickHandler() {
+        this.props.onAdd();
+    }
+
+    render() {
+        return (
+            <tr>
+                <td colSpan="3">
+                    <button
+                        className="btn btn-secondary btn-block btn-sm"
+                        onClick={this.clickHandler.bind(this)}
+                    >
+                        <i className="fa fa-plus" /> Add
+                    </button>
+                </td>
+            </tr>
+        );
+    }
+}
 
 const ParametersTableEmpty = () => (
     <tr>
@@ -30,8 +38,8 @@ class ParametersTable extends React.Component {
             <ParameterRow
                 key={parameter.variable}
                 parameter={parameter}
-                parameterUpdater={this.props.parametersUpdater(i)}
-                parameterDeleter={this.props.parametersDeleter(i)}
+                updater={this.props.updater(i)}
+                onDelete={this.props.deleter(i)}
             />
         );
         return this.props.parameters.map(mapper);
@@ -47,21 +55,21 @@ class ParametersTable extends React.Component {
             <table className="table table-bordered table-sm">
                 <tbody>
                     {this.getTableContent()}
-                    <ParametersTableFooter clickHandler={this.props.addHandler} />
+                    <ParametersTableFooter onAdd={this.props.adder} />
                 </tbody>
             </table>
         );
     }
 }
 
-const Parameters = ({parameters, parametersUpdater, parametersDeleter, addHandler}) => (
+const Parameters = ({parameters, adder, updater, deleter}) => (
     <AppSection>
         <h1>Choose parameters</h1>
         <ParametersTable
             parameters={parameters}
-            parametersUpdater={parametersUpdater}
-            parametersDeleter={parametersDeleter}
-            addHandler={addHandler}
+            adder={adder}
+            updater={updater}
+            deleter={deleter}
         />
     </AppSection>
 );

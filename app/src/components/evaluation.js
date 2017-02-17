@@ -86,7 +86,7 @@ class EvaluationTester extends React.Component {
             <EvaluationParameter
                 key={i}
                 parameter={parameter}
-                onChange={this.props.parametersUpdater(i)('value')}
+                onChange={this.props.updater(i)}
             />
         );
         return this.props.parameters.map(mapper);
@@ -114,12 +114,12 @@ class EvaluationTester extends React.Component {
     }
 }
 
-const Evaluation = ({parameters, parametersUpdater, formula}) => (
+const Evaluation = ({parameters, updater, formula}) => (
     <AppSection>
         <h1>Evaluate</h1>
         <EvaluationTester
             parameters={parameters}
-            parametersUpdater={parametersUpdater}
+            updater={updater}
             formula={formula}
         />
     </AppSection>

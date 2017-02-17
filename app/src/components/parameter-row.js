@@ -43,10 +43,10 @@ class ParameterDefaultValue extends React.Component {
     }
 }
 
-const ParameterOptions = ({parameter, parameterUpdater}) => (
+const ParameterOptions = ({parameter, updater}) => (
     <ParameterDefaultValue
         defaultValue={parameter.defaultValue}
-        onChange={parameterUpdater('defaultValue')}
+        onChange={updater('defaultValue')}
     />
 );
 
@@ -56,14 +56,14 @@ class ParameterConfig extends React.Component {
             <div>
                 <ParameterLabel
                     label={this.props.parameter.label}
-                    onChange={this.props.parameterUpdater('label')}
+                    onChange={this.props.updater('label')}
                 />
 
                 {this.props.expanded ?
                     <div className="parameter-extra">
                         <ParameterOptions
                             parameter={this.props.parameter}
-                            parameterUpdater={this.props.parameterUpdater}
+                            updater={this.props.updater}
                         />
                     </div>
                 : null}
@@ -128,7 +128,7 @@ class ParameterRow extends React.Component {
                 <td>
                     <ParameterConfig
                         parameter={this.props.parameter}
-                        parameterUpdater={this.props.parameterUpdater}
+                        updater={this.props.updater}
                         expanded={this.state.expanded}
                     />
                 </td>
@@ -136,7 +136,7 @@ class ParameterRow extends React.Component {
                     <ParameterActions
                         expanded={this.state.expanded}
                         onToggle={this.toggleOptions.bind(this)}
-                        onDelete={this.props.parameterDeleter}
+                        onDelete={this.props.onDelete}
                     />
                 </td>
             </tr>
