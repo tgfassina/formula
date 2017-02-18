@@ -33,7 +33,7 @@ class ParameterDefaultValue extends React.Component {
             <div className="inline-control-group text-right">
                 <label><small>Default value</small></label>
                 <input
-                    type="text"
+                    type="number"
                     className="form-control form-control-sm"
                     value={this.props.defaultValue}
                     onChange={this.changeHandler.bind(this)}
