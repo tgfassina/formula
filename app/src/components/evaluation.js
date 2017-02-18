@@ -47,25 +47,9 @@ const EvaluationNoParameters = () => (
 );
 
 class EvaluationTester extends React.Component {
-    getPlaceholderFormula() {
-        const mapper = (parameter) => (parameter.variable);
-        return this.props.parameters.map(mapper).join(' + ');
-    }
-
-    getExpression() {
-        const length = this.props.formula.length;
-        const formula = this.props.formula;
-        const placeholder = this.getPlaceholderFormula();
-        return length ? formula : placeholder;
-    }
-
     evaluateResult() {
-        const expression = this.getExpression();
-
-        const scope = this.props.parameters.reduce((carry, param) => {
-            carry[param.variable] = param.getValue();
-            return carry;
-        }, {});
+        const expression = this.props.getExpression(this.props.parameters);
+        const scope = this.props.getScope(this.props.parameters);
 
         try {
             const result = math.eval(expression, scope);
@@ -81,19 +65,15 @@ class EvaluationTester extends React.Component {
 
     }
 
-    mapParameters() {
-        let mapper = (parameter, i) => (
+    getParameters() {
+        const mapper = (parameter, i) => (
             <EvaluationParameter
                 key={i}
                 parameter={parameter}
                 onChange={this.props.updater(i)}
             />
         );
-        return this.props.parameters.map(mapper);
-    }
-
-    getParametersData() {
-        let parameters = this.mapParameters();
+        const parameters = this.props.parameters.map(mapper);
         return parameters.length ? parameters : <EvaluationNoParameters />
     }
 
@@ -101,7 +81,7 @@ class EvaluationTester extends React.Component {
         return (
             <div className="row no-gutters align-items-center">
                 <div className="col-4">
-                    {this.getParametersData()}
+                    {this.getParameters()}
                 </div>
                 <div className="col-2 text-center">
                     <i className="fa fa-arrow-right fa-2x"></i>
@@ -114,13 +94,14 @@ class EvaluationTester extends React.Component {
     }
 }
 
-const Evaluation = ({parameters, updater, formula}) => (
+const Evaluation = ({parameters, updater, getExpression, getScope}) => (
     <AppSection>
         <h1>Evaluate</h1>
         <EvaluationTester
             parameters={parameters}
             updater={updater}
-            formula={formula}
+            getExpression={getExpression}
+            getScope={getScope}
         />
     </AppSection>
 );

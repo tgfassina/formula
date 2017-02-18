@@ -21,8 +21,7 @@ class FormulaInput extends React.Component {
 
 class Formula extends React.Component {
     getPlaceholder() {
-        let mapper = (parameter) => (parameter.variable);
-        return this.props.parameters.map(mapper).join(' + ');
+        return this.props.getDefaultFormula(this.props.parameters);
     }
 
     render() {
