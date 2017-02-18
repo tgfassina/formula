@@ -36,14 +36,13 @@ class App extends React.Component {
                 />
                 <Formula
                     parameters={this.state.parameters}
-                    getDefaultFormula={this.formula.getDefault}
+                    placeholderGetter={this.formula.getDefault}
                     onUpdate={this.formula.updater.bind(this.formula)}
                 />
                 <Evaluation
                     parameters={this.state.parameters}
                     updater={this.parameters.valueUpdater.bind(this.parameters)}
-                    getExpression={this.formula.getExpression.bind(this.formula)}
-                    getScope={this.formula.getScope}
+                    evaluator={this.formula.evaluator.bind(this.formula)}
                 />
             </div>
         );

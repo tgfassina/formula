@@ -1,3 +1,5 @@
+import math from 'mathjs/index.js';
+
 class FormulaModel {
     constructor(stateHandler, stateKey) {
         this.expression = '';
@@ -13,6 +15,23 @@ class FormulaModel {
     updater(expression) {
         this.expression = expression;
         this.setState();
+    }
+
+    evaluator(parameters) {
+        const expression = this.getExpression(parameters);
+        const scope = this.getScope(parameters);
+
+        try {
+            const result = math.eval(expression, scope);
+            const formatParams = {
+                exponential: {lower: 1e-10, upper: 1e10},
+                precision: 10,
+            };
+            return isNaN(result) ? '' : math.format(result, formatParams);
+        }
+        catch (error) {
+            return '';
+        }
     }
 
     getDefault(parameters) {

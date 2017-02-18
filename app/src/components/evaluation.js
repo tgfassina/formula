@@ -1,7 +1,6 @@
 import React from 'react';
 
 import AppSection from './parts/app-section.js';
-import math from 'mathjs/index.js';
 
 const EvaluationLabelEmpty = () => (
     <label className="text-muted">
@@ -47,25 +46,7 @@ const EvaluationNoParameters = () => (
 );
 
 class EvaluationTester extends React.Component {
-    evaluateResult() {
-        const expression = this.props.getExpression(this.props.parameters);
-        const scope = this.props.getScope(this.props.parameters);
-
-        try {
-            const result = math.eval(expression, scope);
-            const formatParams = {
-                exponential: {lower: 1e-10, upper: 1e10},
-                precision: 10,
-            };
-            return isNaN(result) ? '' : math.format(result, formatParams);
-        }
-        catch (error) {
-            return '';
-        }
-
-    }
-
-    getParameters() {
+    mapParameters() {
         const mapper = (parameter, i) => (
             <EvaluationParameter
                 key={i}
@@ -81,27 +62,28 @@ class EvaluationTester extends React.Component {
         return (
             <div className="row no-gutters align-items-center">
                 <div className="col-4">
-                    {this.getParameters()}
+                    {this.mapParameters()}
                 </div>
                 <div className="col-2 text-center">
                     <i className="fa fa-arrow-right fa-2x"></i>
                 </div>
                 <div className="col-6">
-                    <EvaluationResult result={this.evaluateResult()} />
+                    <EvaluationResult
+                        result={this.props.evaluator(this.props.parameters)}
+                    />
                 </div>
             </div>
         );
     }
 }
 
-const Evaluation = ({parameters, updater, getExpression, getScope}) => (
+const Evaluation = ({parameters, updater, evaluator}) => (
     <AppSection>
         <h1>Evaluate</h1>
         <EvaluationTester
             parameters={parameters}
             updater={updater}
-            getExpression={getExpression}
-            getScope={getScope}
+            evaluator={evaluator}
         />
     </AppSection>
 );

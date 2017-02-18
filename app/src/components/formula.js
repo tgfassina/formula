@@ -19,22 +19,14 @@ class FormulaInput extends React.Component {
     }
 }
 
-class Formula extends React.Component {
-    getPlaceholder() {
-        return this.props.getDefaultFormula(this.props.parameters);
-    }
-
-    render() {
-        return (
-            <AppSection>
-                <h1>Write formula</h1>
-                <FormulaInput
-                    placeholder={this.getPlaceholder()}
-                    onUpdate={this.props.onUpdate}
-                />
-            </AppSection>
-        );
-    }
-}
+const Formula = ({parameters, placeholderGetter, onUpdate}) => (
+    <AppSection>
+        <h1>Write formula</h1>
+        <FormulaInput
+            placeholder={placeholderGetter(parameters)}
+            onUpdate={onUpdate}
+        />
+    </AppSection>
+);
 
 export default Formula;
