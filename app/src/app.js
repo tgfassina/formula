@@ -10,6 +10,7 @@ import Formula from './components/formula.js';
 import Evaluation from './components/evaluation.js';
 
 import ParameterListModel from './models/parameter-list.js';
+import FormulaModel from './models/formula.js';
 
 class App extends React.Component {
     constructor() {
@@ -21,10 +22,7 @@ class App extends React.Component {
 
         const stateHandler = this.setState.bind(this);
         this.parameters = new ParameterListModel(stateHandler, 'parameters');
-    }
-
-    updateFormula(newFormula) {
-        this.setState({formula: newFormula});
+        this.formula = new FormulaModel(stateHandler, 'formula', this.parameters);
     }
 
     render() {
@@ -32,18 +30,18 @@ class App extends React.Component {
             <div>
                 <Parameters
                     parameters={this.state.parameters}
-                    adder={this.parameters.adder.bind(this.parameters)}
-                    updater={this.parameters.updater.bind(this.parameters)}
-                    deleter={this.parameters.deleter.bind(this.parameters)}
+                    onAdd={this.parameters.getAdder()}
+                    updater={this.parameters.getUpdater()}
+                    deleter={this.parameters.getDeleter()}
                 />
                 <Formula
-                    parameters={this.state.parameters}
-                    onUpdate={this.updateFormula.bind(this)}
+                    placeholder={this.formula.getDefault()}
+                    onUpdate={this.formula.getUpdater()}
                 />
                 <Evaluation
                     parameters={this.state.parameters}
-                    updater={this.parameters.valueUpdater.bind(this.parameters)}
-                    formula={this.state.formula}
+                    updater={this.parameters.getValueUpdater()}
+                    result={this.formula.evaluate()}
                 />
             </div>
         );

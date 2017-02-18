@@ -33,7 +33,7 @@ class ParameterDefaultValue extends React.Component {
             <div className="inline-control-group text-right">
                 <label><small>Default value</small></label>
                 <input
-                    type="text"
+                    type="number"
                     className="form-control form-control-sm"
                     value={this.props.defaultValue}
                     onChange={this.changeHandler.bind(this)}
@@ -50,34 +50,30 @@ const ParameterOptions = ({parameter, updater}) => (
     />
 );
 
-class ParameterConfig extends React.Component {
-    render() {
-        return (
-            <div>
-                <ParameterLabel
-                    label={this.props.parameter.label}
-                    onChange={this.props.updater('label')}
-                />
+const ParameterConfig = ({parameter, updater, expanded}) => (
+    <div>
+        <ParameterLabel
+            label={parameter.label}
+            onChange={updater('label')}
+        />
 
-                {this.props.expanded ?
-                    <div className="parameter-extra">
-                        <ParameterOptions
-                            parameter={this.props.parameter}
-                            updater={this.props.updater}
-                        />
-                    </div>
-                : null}
+        {expanded ?
+            <div className="parameter-extra">
+                <ParameterOptions
+                    parameter={parameter}
+                    updater={updater}
+                />
             </div>
-        );
-    }
-};
+        : null}
+    </div>
+);
 
 class ParameterActions extends React.Component {
-    handleToggle() {
+    toggleHandler() {
         this.props.onToggle();
     }
 
-    handleDelete() {
+    deleteHandler() {
         this.props.onDelete();
     }
 
@@ -86,7 +82,7 @@ class ParameterActions extends React.Component {
             <div>
                 <button
                     className="btn btn-sm btn-block btn-secondary"
-                    onClick={this.handleToggle.bind(this)}
+                    onClick={this.toggleHandler.bind(this)}
                 >
                     {this.props.expanded ?
                         <i className="fa fa-chevron-up" />
@@ -98,7 +94,7 @@ class ParameterActions extends React.Component {
                     <div className="parameter-extra">
                         <button
                             className="btn btn-sm btn-block btn-secondary"
-                            onClick={this.handleDelete.bind(this)}
+                            onClick={this.deleteHandler.bind(this)}
                         >
                             <i className="fa fa-trash-o" />
                         </button>

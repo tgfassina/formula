@@ -34,7 +34,7 @@ const ParametersTableEmpty = () => (
 
 class ParametersTable extends React.Component {
     mapTableRows() {
-        let mapper = (parameter, i) => (
+        const mapper = (parameter, i) => (
             <ParameterRow
                 key={parameter.variable}
                 parameter={parameter}
@@ -42,11 +42,7 @@ class ParametersTable extends React.Component {
                 onDelete={this.props.deleter(i)}
             />
         );
-        return this.props.parameters.map(mapper);
-    }
-
-    getTableContent() {
-        let rows = this.mapTableRows();
+        const rows = this.props.parameters.map(mapper);
         return rows.length ? rows : <ParametersTableEmpty />;
     }
 
@@ -54,20 +50,20 @@ class ParametersTable extends React.Component {
         return (
             <table className="table table-bordered table-sm">
                 <tbody>
-                    {this.getTableContent()}
-                    <ParametersTableFooter onAdd={this.props.adder} />
+                    {this.mapTableRows()}
+                    <ParametersTableFooter onAdd={this.props.onAdd} />
                 </tbody>
             </table>
         );
     }
 }
 
-const Parameters = ({parameters, adder, updater, deleter}) => (
+const Parameters = ({parameters, onAdd, updater, deleter}) => (
     <AppSection>
         <h1>Choose parameters</h1>
         <ParametersTable
             parameters={parameters}
-            adder={adder}
+            onAdd={onAdd}
             updater={updater}
             deleter={deleter}
         />

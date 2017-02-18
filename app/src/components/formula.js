@@ -4,7 +4,7 @@ import AppSection from './parts/app-section.js';
 
 class FormulaInput extends React.Component {
     handleChange(event) {
-        this.props.onChange(event.target.value);
+        this.props.onUpdate(event.target.value);
     }
 
     render() {
@@ -19,23 +19,14 @@ class FormulaInput extends React.Component {
     }
 }
 
-class Formula extends React.Component {
-    getPlaceholder() {
-        let mapper = (parameter) => (parameter.variable);
-        return this.props.parameters.map(mapper).join(' + ');
-    }
-
-    render() {
-        return (
-            <AppSection>
-                <h1>Write formula</h1>
-                <FormulaInput
-                    placeholder={this.getPlaceholder()}
-                    onChange={this.props.onUpdate}
-                />
-            </AppSection>
-        );
-    }
-}
+const Formula = ({placeholder, onUpdate}) => (
+    <AppSection>
+        <h1>Write formula</h1>
+        <FormulaInput
+            placeholder={placeholder}
+            onUpdate={onUpdate}
+        />
+    </AppSection>
+);
 
 export default Formula;

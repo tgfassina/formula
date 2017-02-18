@@ -7,9 +7,8 @@ class ParameterModel {
     }
 
     getValue() {
-        var value = this.value === '' ? this.defaultValue : this.value;
+        const value = this.value === '' ? this.defaultValue : this.value;
         const zeroFallback = (string) => parseInt(string, 10) || 0;
-
         return zeroFallback(value);
     }
 }
