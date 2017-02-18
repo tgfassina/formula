@@ -30,9 +30,9 @@ class App extends React.Component {
             <div>
                 <Parameters
                     parameters={this.state.parameters}
-                    onAdd={this.parameters.adder.bind(this.parameters)}
-                    updater={this.parameters.updater.bind(this.parameters)}
-                    deleter={this.parameters.deleter.bind(this.parameters)}
+                    onAdd={this.parameters.getAdder()}
+                    updater={this.parameters.getUpdater()}
+                    deleter={this.parameters.getDeleter()}
                 />
                 <Formula
                     placeholder={this.formula.getDefault(this.state.parameters)}
@@ -40,7 +40,7 @@ class App extends React.Component {
                 />
                 <Evaluation
                     parameters={this.state.parameters}
-                    updater={this.parameters.valueUpdater.bind(this.parameters)}
+                    updater={this.parameters.getValueUpdater()}
                     result={this.formula.evaluate(this.state.parameters)}
                 />
             </div>

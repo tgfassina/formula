@@ -13,30 +13,30 @@ class ParameterListModel {
         this.stateHandler({[this.stateKey]: this.data});
     }
 
-    adder() {
-        this.count++;
-        this.data.push(new ParameterModel('X'+this.count));
-        this.setState();
+    getAdder() {
+        return () => {
+            this.count++;
+            this.data.push(new ParameterModel('X'+this.count));
+            this.setState();
+        }
     }
 
-    updater(key) {
-        return (attribute) => {
-            return (value) => {
-                this.data[key][attribute] = value;
-                this.setState();
-            }
-        };
+    getUpdater() {
+        return (key) => (attribute) => (value) => {
+            this.data[key][attribute] = value;
+            this.setState();
+        }
     }
 
-    valueUpdater(key) {
-        return (value) => {
+    getValueUpdater() {
+        return (key) => (value) => {
             this.data[key].value = value;
             this.setState();
-        };
+        }
     }
 
-    deleter(key) {
-        return() => {
+    getDeleter() {
+        return (key) => () => {
             this.data.splice(key, 1);
             this.setState();
         }
