@@ -69,7 +69,7 @@ class EvaluationTester extends React.Component {
                 </div>
                 <div className="col-6">
                     <EvaluationResult
-                        result={this.props.evaluator(this.props.parameters)}
+                        result={this.props.result}
                     />
                 </div>
             </div>
@@ -77,13 +77,13 @@ class EvaluationTester extends React.Component {
     }
 }
 
-const Evaluation = ({parameters, updater, evaluator}) => (
+const Evaluation = ({parameters, updater, result}) => (
     <AppSection>
         <h1>Evaluate</h1>
         <EvaluationTester
             parameters={parameters}
             updater={updater}
-            evaluator={evaluator}
+            result={result}
         />
     </AppSection>
 );

@@ -17,7 +17,7 @@ class FormulaModel {
         this.setState();
     }
 
-    evaluator(parameters) {
+    evaluate(parameters) {
         const expression = this.getExpression(parameters);
         const scope = this.getScope(parameters);
 

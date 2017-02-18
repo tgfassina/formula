@@ -35,14 +35,13 @@ class App extends React.Component {
                     deleter={this.parameters.deleter.bind(this.parameters)}
                 />
                 <Formula
-                    parameters={this.state.parameters}
-                    placeholderGetter={this.formula.getDefault}
+                    placeholder={this.formula.getDefault(this.state.parameters)}
                     onUpdate={this.formula.updater.bind(this.formula)}
                 />
                 <Evaluation
                     parameters={this.state.parameters}
                     updater={this.parameters.valueUpdater.bind(this.parameters)}
-                    evaluator={this.formula.evaluator.bind(this.formula)}
+                    result={this.formula.evaluate(this.state.parameters)}
                 />
             </div>
         );

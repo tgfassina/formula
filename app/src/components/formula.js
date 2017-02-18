@@ -19,11 +19,11 @@ class FormulaInput extends React.Component {
     }
 }
 
-const Formula = ({parameters, placeholderGetter, onUpdate}) => (
+const Formula = ({placeholder, onUpdate}) => (
     <AppSection>
         <h1>Write formula</h1>
         <FormulaInput
-            placeholder={placeholderGetter(parameters)}
+            placeholder={placeholder}
             onUpdate={onUpdate}
         />
     </AppSection>
