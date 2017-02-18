@@ -30,7 +30,7 @@ class App extends React.Component {
             <div>
                 <Parameters
                     parameters={this.state.parameters}
-                    adder={this.parameters.adder.bind(this.parameters)}
+                    onAdd={this.parameters.adder.bind(this.parameters)}
                     updater={this.parameters.updater.bind(this.parameters)}
                     deleter={this.parameters.deleter.bind(this.parameters)}
                 />

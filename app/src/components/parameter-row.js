@@ -73,11 +73,11 @@ class ParameterConfig extends React.Component {
 };
 
 class ParameterActions extends React.Component {
-    handleToggle() {
+    toggleHandler() {
         this.props.onToggle();
     }
 
-    handleDelete() {
+    deleteHandler() {
         this.props.onDelete();
     }
 
@@ -86,7 +86,7 @@ class ParameterActions extends React.Component {
             <div>
                 <button
                     className="btn btn-sm btn-block btn-secondary"
-                    onClick={this.handleToggle.bind(this)}
+                    onClick={this.toggleHandler.bind(this)}
                 >
                     {this.props.expanded ?
                         <i className="fa fa-chevron-up" />
@@ -98,7 +98,7 @@ class ParameterActions extends React.Component {
                     <div className="parameter-extra">
                         <button
                             className="btn btn-sm btn-block btn-secondary"
-                            onClick={this.handleDelete.bind(this)}
+                            onClick={this.deleteHandler.bind(this)}
                         >
                             <i className="fa fa-trash-o" />
                         </button>
