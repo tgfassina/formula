@@ -22,7 +22,7 @@ class App extends React.Component {
 
         const stateHandler = this.setState.bind(this);
         this.parameters = new ParameterListModel(stateHandler, 'parameters');
-        this.formula = new FormulaModel(stateHandler, 'formula');
+        this.formula = new FormulaModel(stateHandler, 'formula', this.parameters);
     }
 
     render() {
@@ -35,13 +35,13 @@ class App extends React.Component {
                     deleter={this.parameters.getDeleter()}
                 />
                 <Formula
-                    placeholder={this.formula.getDefault(this.state.parameters)}
+                    placeholder={this.formula.getDefault()}
                     onUpdate={this.formula.getUpdater()}
                 />
                 <Evaluation
                     parameters={this.state.parameters}
                     updater={this.parameters.getValueUpdater()}
-                    result={this.formula.evaluate(this.state.parameters)}
+                    result={this.formula.evaluate()}
                 />
             </div>
         );
