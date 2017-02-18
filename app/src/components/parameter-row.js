@@ -50,27 +50,23 @@ const ParameterOptions = ({parameter, updater}) => (
     />
 );
 
-class ParameterConfig extends React.Component {
-    render() {
-        return (
-            <div>
-                <ParameterLabel
-                    label={this.props.parameter.label}
-                    onChange={this.props.updater('label')}
-                />
+const ParameterConfig = ({parameter, updater, expanded}) => (
+    <div>
+        <ParameterLabel
+            label={parameter.label}
+            onChange={updater('label')}
+        />
 
-                {this.props.expanded ?
-                    <div className="parameter-extra">
-                        <ParameterOptions
-                            parameter={this.props.parameter}
-                            updater={this.props.updater}
-                        />
-                    </div>
-                : null}
+        {expanded ?
+            <div className="parameter-extra">
+                <ParameterOptions
+                    parameter={parameter}
+                    updater={updater}
+                />
             </div>
-        );
-    }
-};
+        : null}
+    </div>
+);
 
 class ParameterActions extends React.Component {
     toggleHandler() {

@@ -68,9 +68,7 @@ class EvaluationTester extends React.Component {
                     <i className="fa fa-arrow-right fa-2x"></i>
                 </div>
                 <div className="col-6">
-                    <EvaluationResult
-                        result={this.props.result}
-                    />
+                    <EvaluationResult result={this.props.result} />
                 </div>
             </div>
         );
