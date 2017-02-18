@@ -12,9 +12,11 @@ class FormulaModel {
         this.stateHandler({[this.stateKey]: this.expression});
     }
 
-    updater(expression) {
-        this.expression = expression;
-        this.setState();
+    getUpdater() {
+        return (expression) => {
+            this.expression = expression;
+            this.setState();
+        }
     }
 
     evaluate(parameters) {

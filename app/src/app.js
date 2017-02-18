@@ -36,7 +36,7 @@ class App extends React.Component {
                 />
                 <Formula
                     placeholder={this.formula.getDefault(this.state.parameters)}
-                    onUpdate={this.formula.updater.bind(this.formula)}
+                    onUpdate={this.formula.getUpdater()}
                 />
                 <Evaluation
                     parameters={this.state.parameters}
