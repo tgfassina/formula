@@ -4,7 +4,7 @@ import AppSection from './parts/app-section.js';
 
 class FormulaInput extends React.Component {
     handleChange(event) {
-        this.props.onChange(event.target.value);
+        this.props.onUpdate(event.target.value);
     }
 
     render() {
@@ -31,7 +31,7 @@ class Formula extends React.Component {
                 <h1>Write formula</h1>
                 <FormulaInput
                     placeholder={this.getPlaceholder()}
-                    onChange={this.props.onUpdate}
+                    onUpdate={this.props.onUpdate}
                 />
             </AppSection>
         );
