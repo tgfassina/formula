@@ -1,23 +1,9 @@
-class Parameter {
-    constructor(variable) {
-        this.variable = variable;
-        this.label = '';
-        this.value = '';
-        this.defaultValue = '';
-    }
-
-    getValue() {
-        const value = this.value === '' ? this.defaultValue : this.value;
-        const zeroFallback = (string) => parseInt(string, 10) || 0;
-        return zeroFallback(value);
-    }
-}
-
 class ParametersModel {
     constructor(stateUpdater) {
         this.stateUpdater = stateUpdater;
         this.count = 0;
         this.data = [];
+        this.scope = {};
     }
 
     export() {
@@ -29,10 +15,21 @@ class ParametersModel {
         return this.data.map(mapper).join(' + ');
     }
 
+    exportScope() {
+        return Object.assign(this.getDefaultScope(), this.scope);
+    }
+
     getAdder() {
         return () => {
             this.count++;
-            this.data.push(new Parameter('X'+this.count));
+
+            const newParameter = {
+                variable: ['X', this.count].join(''),
+                defaultValue: '',
+                label: '',
+            };
+
+            this.data.push(newParameter);
             this.stateUpdater();
         }
     }
@@ -44,18 +41,25 @@ class ParametersModel {
         }
     }
 
-    getValueUpdater() {
-        return (key) => (value) => {
-            this.data[key].value = value;
-            this.stateUpdater();
-        }
-    }
-
     getDeleter() {
         return (key) => () => {
             this.data.splice(key, 1);
             this.stateUpdater();
         }
+    }
+
+    getScopeUpdater() {
+        return (variable) => (value) => {
+            this.scope[variable] = value;
+            this.stateUpdater();
+        }
+    }
+
+    getDefaultScope() {
+        return this.data.reduce((carry, param) => {
+            carry[param.variable] = param.defaultValue;
+            return carry;
+        }, {})
     }
 }
 

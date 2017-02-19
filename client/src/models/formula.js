@@ -1,16 +1,16 @@
 class FormulaModel {
     constructor(stateUpdater) {
         this.stateUpdater = stateUpdater;
-        this.expression = '';
+        this.data = '';
     }
 
     export() {
-        return this.expression;
+        return this.data;
     }
 
     getUpdater() {
         return (expression) => {
-            this.expression = expression;
+            this.data = expression;
             this.stateUpdater();
         }
     }

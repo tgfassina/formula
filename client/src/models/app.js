@@ -12,7 +12,7 @@ class AppModel {
         this.evaluator = new EvaluatorModel(
             this.getStateUpdater(),
             this.parameters,
-            this.formula,
+            this.formula
         );
     }
 
@@ -41,7 +41,7 @@ class AppModel {
     }
 
     getValuesUpdater() {
-        return this.parameters.getValueUpdater();
+        return this.parameters.getScopeUpdater();
     }
 
     getFormulaUpdater() {
