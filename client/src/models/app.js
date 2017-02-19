@@ -12,7 +12,6 @@ class AppModel {
     getInitialState() {
         return {
             parameters: [],
-            formula: '',
             formulaPlaceholder: '',
             result: '-'
         };
@@ -22,7 +21,6 @@ class AppModel {
         return () => (
             this.stateHandler({
                 parameters: this.parameters.export(),
-                formula: this.formula.export(),
                 formulaPlaceholder: this.formula.getDefault(this.parameters.export()),
                 result: this.formula.evaluate(this.parameters.export())
             })
