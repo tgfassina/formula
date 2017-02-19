@@ -4,7 +4,7 @@
   "scripts": {
     "build": "react-scripts build",
     "fixpack": "fixpack",
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
@@ -19,5 +19,6 @@
   "devDependencies": {
     "fixpack": "^2.3.1",
     "react-scripts": "0.8.5"
-  }
+  },
+  "proxy": "http://localhost:3000/"
 }
