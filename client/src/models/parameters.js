@@ -24,6 +24,11 @@ class ParametersModel {
         return this.data;
     }
 
+    exportDefaultFormula() {
+        const mapper = (parameter) => (parameter.variable);
+        return this.data.map(mapper).join(' + ');
+    }
+
     getAdder() {
         return () => {
             this.count++;

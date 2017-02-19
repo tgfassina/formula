@@ -14,7 +14,7 @@ class App extends React.Component {
     constructor() {
         super();
         this.model = new AppModel(this.setState.bind(this));
-        this.state = this.model.getInitialState();
+        this.state = this.model.export();
     }
 
     render() {

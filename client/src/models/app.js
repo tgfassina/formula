@@ -1,5 +1,6 @@
 import ParametersModel from './parameters.js';
 import FormulaModel from './formula.js';
+import EvaluatorModel from './evaluator.js';
 
 class AppModel {
     constructor(stateHandler) {
@@ -7,24 +8,24 @@ class AppModel {
 
         this.parameters = new ParametersModel(this.getStateUpdater());
         this.formula = new FormulaModel(this.getStateUpdater());
+
+        this.evaluator = new EvaluatorModel(
+            this.getStateUpdater(),
+            this.parameters,
+            this.formula,
+        );
     }
 
-    getInitialState() {
+    export() {
         return {
-            parameters: [],
-            formulaPlaceholder: '',
-            result: '-'
+            parameters: this.parameters.export(),
+            formulaPlaceholder: this.parameters.exportDefaultFormula(),
+            result: this.evaluator.export()
         };
     }
 
     getStateUpdater() {
-        return () => (
-            this.stateHandler({
-                parameters: this.parameters.export(),
-                formulaPlaceholder: this.formula.getDefault(this.parameters.export()),
-                result: this.formula.evaluate(this.parameters.export())
-            })
-        );
+        return () => (this.stateHandler(this.export()));
     }
 
     getParametersAdder() {
