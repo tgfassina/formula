@@ -1,28 +1,25 @@
 import math from 'mathjs/index.js';
 
 class FormulaModel {
-    constructor(stateHandler, stateKey, parameters) {
+    constructor(stateUpdater) {
+        this.stateUpdater = stateUpdater;
         this.expression = '';
-        this.parameters = parameters;
-
-        this.stateKey = stateKey;
-        this.stateHandler = stateHandler;
     }
 
-    setState() {
-        this.stateHandler({[this.stateKey]: this.expression});
+    export() {
+        return this.expression;
     }
 
     getUpdater() {
         return (expression) => {
             this.expression = expression;
-            this.setState();
+            this.stateUpdater();
         }
     }
 
-    evaluate() {
-        const expression = this.getExpression();
-        const scope = this.getScope();
+    evaluate(parameters) {
+        const expression = this.getExpression(parameters);
+        const scope = this.getScope(parameters);
 
         try {
             const result = math.eval(expression, scope);
@@ -37,17 +34,17 @@ class FormulaModel {
         }
     }
 
-    getDefault() {
+    getDefault(parameters) {
         const mapper = (parameter) => (parameter.variable);
-        return this.parameters.data.map(mapper).join(' + ');
+        return parameters.map(mapper).join(' + ');
     }
 
-    getExpression() {
-        return this.expression || this.getDefault(this.parameters.data);
+    getExpression(parameters) {
+        return this.expression || this.getDefault(parameters);
     }
 
-    getScope() {
-        return this.parameters.data.reduce((carry, param) => {
+    getScope(parameters) {
+        return parameters.reduce((carry, param) => {
             carry[param.variable] = param.getValue();
             return carry;
         }, {})
