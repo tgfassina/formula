@@ -35,7 +35,7 @@ class EvaluationParameter extends React.Component {
 
 const EvaluationResult = ({result}) => (
     <code className="result-display" title={result}>
-        {result || '–'}
+        {result}
     </code>
 );
 
@@ -49,9 +49,9 @@ class EvaluationTester extends React.Component {
     mapParameters() {
         const mapper = (parameter, i) => (
             <EvaluationParameter
-                key={i}
+                key={parameter.variable}
                 parameter={parameter}
-                onChange={this.props.updater(i)}
+                onChange={this.props.updater(parameter.variable)}
             />
         );
         const parameters = this.props.parameters.map(mapper);
