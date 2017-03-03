@@ -12,8 +12,8 @@ class App extends React.Component {
             <Router history={browserHistory}>
                 <Route path="/" component={Layout}>
                     <IndexRoute component={Edit} />
-                    <Route path="/edit" component={Edit} />
-                    <Route path="/eval" component={Eval} />
+                    <Route path="/edit/:key" component={Edit} />
+                    <Route path="/eval/:key" component={Eval} />
                     <Route path='*' component={NotFound} />
                 </Route>
             </Router>
