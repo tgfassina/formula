@@ -1,6 +1,5 @@
 import React from 'react';
 
-import AppSection from './parts/app-section.js';
 import ParameterRow from './parameter-row.js';
 
 class ParametersTableFooter extends React.Component {
@@ -59,7 +58,7 @@ class ParametersTable extends React.Component {
 }
 
 const Parameters = ({parameters, onAdd, updater, deleter}) => (
-    <AppSection>
+    <div>
         <h1>Choose parameters</h1>
         <ParametersTable
             parameters={parameters}
@@ -67,7 +66,7 @@ const Parameters = ({parameters, onAdd, updater, deleter}) => (
             updater={updater}
             deleter={deleter}
         />
-    </AppSection>
+    </div>
 );
 
 export default Parameters;
