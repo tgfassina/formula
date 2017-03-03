@@ -18,7 +18,7 @@ class Edit extends React.Component {
     }
 
     save() {
-        fetch('/echo', {
+        fetch('/save', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,7 +46,12 @@ class Edit extends React.Component {
                     updater={this.model.getValuesUpdater()}
                 />
                 <hr />
-                <button className="btn btn-secondary" onClick={this.save.bind(this)}>Save</button>
+                <button
+                    className="btn btn-sm btn-secondary pull-right"
+                    onClick={this.save.bind(this)}
+                >
+                    Test save
+                </button>
             </div>
         );
     }
