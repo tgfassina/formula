@@ -14,6 +14,10 @@ class Edit extends React.Component {
         this.state = this.model.export()
     }
 
+    componentDidMout() {
+        this.setState({sharedId: false})
+    }
+
     save() {
         fetch('/save', {
             method: 'POST',
@@ -22,6 +26,8 @@ class Edit extends React.Component {
             },
             body: JSON.stringify(this.model.exportForDatabase()),
         })
+        .then(response => response.json())
+        .then(data => this.setState({sharedId: data.id}))
     }
 
     render() {
@@ -45,6 +51,7 @@ class Edit extends React.Component {
                 <Share
                     onUpdate={this.model.getTitleUpdater()}
                     onSave={this.save.bind(this)}
+                    sharedId={this.state.sharedId}
                 />
             </div>
         )

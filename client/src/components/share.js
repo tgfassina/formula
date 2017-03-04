@@ -11,6 +11,12 @@ class Share extends React.Component {
         this.props.onUpdate(event.target.value)
     }
 
+    getShareUrl() {
+        if (this.props.sharedId) {
+            return 'localhost:3001/eval/'+this.props.sharedId
+        }
+    }
+
     render() {
         return (
             <AppSection>
@@ -33,6 +39,7 @@ class Share extends React.Component {
                                 </button>
                             </span>
                         </div>
+                        {this.getShareUrl()}
                     </div>
                 </div>
             </AppSection>
