@@ -9,6 +9,10 @@ class Eval extends React.Component {
         this.state = this.model.export()
     }
 
+    componentDidMount() {
+        this.load()
+    }
+
     load() {
         fetch('/load/'+this.props.params.key, {
             method: 'GET',
@@ -28,13 +32,6 @@ class Eval extends React.Component {
                     result={this.state.result}
                     updater={this.model.getValuesUpdater()}
                 />
-                <hr />
-                <button
-                    className="btn btn-secondary btn-sm pull-right"
-                    onClick={this.load.bind(this)}
-                >
-                    Test load
-                </button>
             </div>
         )
     }
