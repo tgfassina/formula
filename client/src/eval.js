@@ -1,9 +1,5 @@
 import React from 'react';
 
-import './vendor/index.js'
-import './styles/custom.css';
-import './styles/formula.css';
-
 import Parameters from './components/parameters.js';
 import Formula from './components/formula.js';
 import Evaluation from './components/evaluation.js';
