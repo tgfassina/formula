@@ -8,6 +8,12 @@ class FormulaModel {
         return this.data;
     }
 
+    import(data) {
+        this.data = data;
+        this.stateUpdater();
+    }
+
+
     getUpdater() {
         return (expression) => {
             this.data = expression;

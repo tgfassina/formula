@@ -19,6 +19,13 @@ class ParametersModel {
         return Object.assign(this.getDefaultScope(), this.scope);
     }
 
+    import(data) {
+        this.count = data.length;
+        this.data = data;
+        this.stateUpdater();
+    }
+
+
     getAdder() {
         return () => {
             this.count++;

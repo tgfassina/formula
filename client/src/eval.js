@@ -16,6 +16,8 @@ class Eval extends React.Component {
                 'Content-Type': 'application/json',
             },
         })
+        .then((response) => (response.json()))
+        .then((data) => (this.model.import(data.data)))
     }
 
     render() {
