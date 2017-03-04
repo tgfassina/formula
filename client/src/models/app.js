@@ -8,6 +8,7 @@ class AppModel {
 
         this.parameters = new ParametersModel(this.getStateUpdater())
         this.formula = new FormulaModel(this.getStateUpdater())
+        this.title = ''
 
         this.evaluator = new EvaluatorModel(
             this.getStateUpdater(),
@@ -21,6 +22,7 @@ class AppModel {
             parameters: this.parameters.export(),
             formulaPlaceholder: this.parameters.exportDefaultFormula(),
             result: this.evaluator.export(),
+            title: this.title,
         }
     }
 
@@ -29,6 +31,7 @@ class AppModel {
             data: {
                 parameters: this.parameters.export(),
                 formula: this.formula.export(),
+                title: this.title,
             },
         }
     }
@@ -61,6 +64,13 @@ class AppModel {
 
     getFormulaUpdater() {
         return this.formula.getUpdater()
+    }
+
+    getTitleUpdater() {
+        return (title) => {
+            this.title = title
+            this.getStateUpdater()()
+        }
     }
 }
 

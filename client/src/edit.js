@@ -43,6 +43,7 @@ class Edit extends React.Component {
                     updater={this.model.getValuesUpdater()}
                 />
                 <Share
+                    onUpdate={this.model.getTitleUpdater()}
                     onSave={this.save.bind(this)}
                 />
             </div>

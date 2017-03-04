@@ -7,6 +7,10 @@ class Share extends React.Component {
         this.props.onSave()
     }
 
+    changeHandler(event) {
+        this.props.onUpdate(event.target.value)
+    }
+
     render() {
         return (
             <AppSection>
@@ -17,6 +21,7 @@ class Share extends React.Component {
                             <input
                                 type="text"
                                 className="form-control"
+                                onChange={this.changeHandler.bind(this)}
                                 placeholder="Name"
                             />
                             <span className="input-group-btn">
