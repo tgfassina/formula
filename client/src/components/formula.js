@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 class FormulaInput extends React.Component {
     handleChange(event) {
-        this.props.onUpdate(event.target.value);
+        this.props.onUpdate(event.target.value)
     }
 
     render() {
@@ -13,7 +13,7 @@ class FormulaInput extends React.Component {
                 placeholder={this.props.placeholder}
                 onChange={this.handleChange.bind(this)}
             />
-        );
+        )
     }
 }
 
@@ -25,6 +25,6 @@ const Formula = ({placeholder, onUpdate}) => (
             onUpdate={onUpdate}
         />
     </div>
-);
+)
 
-export default Formula;
+export default Formula

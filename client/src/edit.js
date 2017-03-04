@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-import Parameters from './components/parameters.js';
-import Formula from './components/formula.js';
-import Evaluation from './components/evaluation.js';
+import Parameters from './components/parameters.js'
+import Formula from './components/formula.js'
+import Evaluation from './components/evaluation.js'
 
-import AppModel from './models/app.js';
+import AppModel from './models/app.js'
 
 class Edit extends React.Component {
     constructor() {
-        super();
-        this.model = new AppModel(this.setState.bind(this));
-        this.state = this.model.export();
+        super()
+        this.model = new AppModel(this.setState.bind(this))
+        this.state = this.model.export()
     }
 
     save() {
@@ -20,7 +20,7 @@ class Edit extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(this.model.exportForDatabase())
-        });
+        })
     }
 
     render() {
@@ -49,8 +49,8 @@ class Edit extends React.Component {
                     Test save
                 </button>
             </div>
-        );
+        )
     }
 }
 
-export default Edit;
+export default Edit

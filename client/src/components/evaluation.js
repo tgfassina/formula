@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 
 const EvaluationLabelEmpty = () => (
     <label className="text-muted">
         <em>Unnamed</em>
     </label>
-);
+)
 
 const EvaluationLabel = ({label}) => (
     label ? <label>{label}</label> : <EvaluationLabelEmpty />
-);
+)
 
 class EvaluationParameter extends React.Component {
     changeHandler(event) {
-        this.props.onChange(event.target.value);
+        this.props.onChange(event.target.value)
     }
 
     render() {
@@ -27,7 +27,7 @@ class EvaluationParameter extends React.Component {
                     onChange={this.changeHandler.bind(this)}
                 />
             </div>
-        );
+        )
     }
 }
 
@@ -35,13 +35,13 @@ const EvaluationResult = ({result}) => (
     <code className="result-display" title={result}>
         {result}
     </code>
-);
+)
 
 const EvaluationNoParameters = () => (
     <div className="text-right text-muted">
         <em>No parameters</em>
     </div>
-);
+)
 
 class EvaluationTester extends React.Component {
     mapParameters() {
@@ -51,8 +51,8 @@ class EvaluationTester extends React.Component {
                 parameter={parameter}
                 onChange={this.props.updater(parameter.variable)}
             />
-        );
-        const parameters = this.props.parameters.map(mapper);
+        )
+        const parameters = this.props.parameters.map(mapper)
         return parameters.length ? parameters : <EvaluationNoParameters />
     }
 
@@ -69,7 +69,7 @@ class EvaluationTester extends React.Component {
                     <EvaluationResult result={this.props.result} />
                 </div>
             </div>
-        );
+        )
     }
 }
 
@@ -82,6 +82,6 @@ const Evaluation = ({parameters, updater, result}) => (
             result={result}
         />
     </div>
-);
+)
 
-export default Evaluation;
+export default Evaluation

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 import './vendor/index.js'
-import './styles/custom.css';
-import './styles/formula.css';
+import './styles/custom.css'
+import './styles/formula.css'
 
 const Layout = ({children}) => (
     <div className="row justify-content-center">
@@ -10,6 +10,6 @@ const Layout = ({children}) => (
             {children}
         </div>
     </div>
-);
+)
 
-export default Layout;
+export default Layout

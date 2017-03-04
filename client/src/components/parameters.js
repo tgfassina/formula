@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-import ParameterRow from './parameter-row.js';
+import ParameterRow from './parameter-row.js'
 
 class ParametersTableFooter extends React.Component {
     clickHandler() {
-        this.props.onAdd();
+        this.props.onAdd()
     }
 
     render() {
@@ -19,7 +19,7 @@ class ParametersTableFooter extends React.Component {
                     </button>
                 </td>
             </tr>
-        );
+        )
     }
 }
 
@@ -29,7 +29,7 @@ const ParametersTableEmpty = () => (
             <em className="empty-table-message">Empty</em>
         </td>
     </tr>
-);
+)
 
 class ParametersTable extends React.Component {
     mapTableRows() {
@@ -40,9 +40,9 @@ class ParametersTable extends React.Component {
                 updater={this.props.updater(i)}
                 onDelete={this.props.deleter(i)}
             />
-        );
-        const rows = this.props.parameters.map(mapper);
-        return rows.length ? rows : <ParametersTableEmpty />;
+        )
+        const rows = this.props.parameters.map(mapper)
+        return rows.length ? rows : <ParametersTableEmpty />
     }
 
     render() {
@@ -53,7 +53,7 @@ class ParametersTable extends React.Component {
                     <ParametersTableFooter onAdd={this.props.onAdd} />
                 </tbody>
             </table>
-        );
+        )
     }
 }
 
@@ -67,6 +67,6 @@ const Parameters = ({parameters, onAdd, updater, deleter}) => (
             deleter={deleter}
         />
     </div>
-);
+)
 
-export default Parameters;
+export default Parameters
