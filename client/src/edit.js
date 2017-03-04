@@ -3,6 +3,7 @@ import React from 'react'
 import Parameters from './components/parameters.js'
 import Formula from './components/formula.js'
 import Evaluation from './components/evaluation.js'
+import Share from './components/share.js'
 
 import AppModel from './models/app.js'
 
@@ -41,13 +42,9 @@ class Edit extends React.Component {
                     result={this.state.result}
                     updater={this.model.getValuesUpdater()}
                 />
-                <hr />
-                <button
-                    className="btn btn-sm btn-secondary pull-right"
-                    onClick={this.save.bind(this)}
-                >
-                    Test save
-                </button>
+                <Share
+                    onSave={this.save.bind(this)}
+                />
             </div>
         )
     }
