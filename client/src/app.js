@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 
 import Layout from './layout.js'
 import Edit from './edit.js'
