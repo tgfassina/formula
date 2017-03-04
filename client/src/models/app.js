@@ -20,7 +20,7 @@ class AppModel {
         return {
             parameters: this.parameters.export(),
             formulaPlaceholder: this.parameters.exportDefaultFormula(),
-            result: this.evaluator.export()
+            result: this.evaluator.export(),
         }
     }
 
@@ -28,8 +28,8 @@ class AppModel {
         return {
             data: {
                 parameters: this.parameters.export(),
-                formula: this.formula.export()
-            }
+                formula: this.formula.export(),
+            },
         }
     }
 
