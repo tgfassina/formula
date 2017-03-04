@@ -1,6 +1,7 @@
 import React from 'react'
 
 import EvaluationTester from './components/evaluation-tester.js'
+import FormulaDisplay from './components/formula-display.js'
 
 import AppModel from './models/app.js'
 
@@ -30,6 +31,9 @@ class Eval extends React.Component {
         return (
             <div>
                 <h1>{this.model.title}</h1>
+                <FormulaDisplay
+                    formula={this.state.formula}
+                />
                 <EvaluationTester
                     parameters={this.state.parameters}
                     result={this.state.result}

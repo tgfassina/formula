@@ -21,6 +21,7 @@ class AppModel {
         return {
             parameters: this.parameters.export(),
             formulaPlaceholder: this.parameters.exportDefaultFormula(),
+            formula: this.formula.export(),
             result: this.evaluator.export(),
             title: this.title,
         }
