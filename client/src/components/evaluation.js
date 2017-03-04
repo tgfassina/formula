@@ -1,5 +1,7 @@
 import React from 'react'
 
+import AppSection from './parts/app-section.js'
+
 const EvaluationLabelEmpty = () => (
     <label className="text-muted">
         <em>Unnamed</em>
@@ -74,14 +76,14 @@ class EvaluationTester extends React.Component {
 }
 
 const Evaluation = ({parameters, updater, result}) => (
-    <div>
+    <AppSection>
         <h1>Evaluate</h1>
         <EvaluationTester
             parameters={parameters}
             updater={updater}
             result={result}
         />
-    </div>
+    </AppSection>
 )
 
 export default Evaluation

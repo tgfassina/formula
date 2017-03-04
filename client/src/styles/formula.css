@@ -1,3 +1,7 @@
+.app-section {
+    margin-bottom: 1.5rem;
+}
+
 .table-row-actions {
     width: 1%;
 }
@@ -8,10 +12,6 @@
 
 .empty-table-message {
     font-size: 18px;
-}
-
-.formula-input {
-    margin-bottom: 1rem;
 }
 
 .result-display {
