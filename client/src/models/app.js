@@ -39,6 +39,8 @@ class AppModel {
     import(data) {
         this.parameters.import(data.parameters)
         this.formula.import(data.formula)
+        this.title = data.title
+        this.getStateUpdater()()
     }
 
 

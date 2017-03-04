@@ -10,7 +10,6 @@ class FormulaModel {
 
     import(data) {
         this.data = data
-        this.stateUpdater()
     }
 
 

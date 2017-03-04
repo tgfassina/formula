@@ -29,6 +29,8 @@ class Eval extends React.Component {
     render() {
         return (
             <div>
+                <h1>{this.model.title}</h1>
+                <hr />
                 <Evaluation
                     parameters={this.state.parameters}
                     result={this.state.result}

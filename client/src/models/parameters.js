@@ -22,7 +22,6 @@ class ParametersModel {
     import(data) {
         this.count = data.length
         this.data = data
-        this.stateUpdater()
     }
 
 
