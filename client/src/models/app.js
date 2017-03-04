@@ -26,9 +26,11 @@ class AppModel {
 
     exportForDatabase() {
         return {
-            parameters: this.parameters.export(),
-            formula: this.formula.export()
-        }
+            data: {
+                parameters: this.parameters.export(),
+                formula: this.formula.export()
+            }
+        };
     }
 
     getStateUpdater() {
