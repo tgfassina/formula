@@ -31,9 +31,7 @@ class Eval extends React.Component {
         return (
             <div>
                 <h1>{this.model.title}</h1>
-                <FormulaDisplay
-                    formula={this.state.formula}
-                />
+                <FormulaDisplay formula={this.state.formula} />
                 <EvaluationTester
                     parameters={this.state.parameters}
                     result={this.state.result}

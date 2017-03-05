@@ -2,7 +2,13 @@ import React from 'react'
 
 import AppSection from './parts/app-section.js'
 
-class Share extends React.Component {
+const UrlDisplay = ({url}) => (
+    <code className="data-display url-display">
+        <small>{url}</small>
+    </code>
+)
+
+class Saver extends React.Component {
     clickHandler() {
         this.props.onSave()
     }
@@ -11,6 +17,29 @@ class Share extends React.Component {
         this.props.onUpdate(event.target.value)
     }
 
+    render() {
+        return (
+            <div className="input-group">
+                <input
+                    type="text"
+                    className="form-control"
+                    onChange={this.changeHandler.bind(this)}
+                    placeholder="Name"
+                />
+                <span className="input-group-btn">
+                    <button
+                        className="btn btn-primary"
+                        onClick={this.clickHandler.bind(this)}
+                    >
+                        Save
+                    </button>
+                </span>
+            </div>
+        )
+    }
+}
+
+class Share extends React.Component {
     getShareUrl() {
         if (this.props.sharedId) {
             return 'localhost:3001/eval/'+this.props.sharedId
@@ -23,25 +52,13 @@ class Share extends React.Component {
                 <h1>Share</h1>
                 <div className="row justify-content-center">
                     <div className="col-10">
-                        <div className="input-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                onChange={this.changeHandler.bind(this)}
-                                placeholder="Name"
-                            />
-                            <span className="input-group-btn">
-                                <button
-                                    className="btn btn-primary"
-                                    onClick={this.clickHandler.bind(this)}
-                                >
-                                    Save
-                                </button>
-                            </span>
-                        </div>
-                        <code className="data-display url-display">
-                            <small>{this.getShareUrl()}</small>
-                        </code>
+                        <Saver
+                            onUpdate={this.props.onUpdate}
+                            onSave={this.props.onSave}
+                        />
+                        {this.props.sharedId ?
+                            <UrlDisplay url={this.getShareUrl()} />
+                        : null}
                     </div>
                 </div>
             </AppSection>
