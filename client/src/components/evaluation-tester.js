@@ -32,7 +32,7 @@ class EvaluationParameter extends React.Component {
 }
 
 const EvaluationResult = ({result}) => (
-    <code className="result-display" title={result}>
+    <code className="data-display result-display" title={result}>
         {result}
     </code>
 )

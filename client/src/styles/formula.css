@@ -14,17 +14,32 @@
     font-size: 18px;
 }
 
-.result-display {
+.data-display {
     display: block;
-    width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.15);
     padding: 12px;
-
-    word-wrap: break-word;
 
     text-align: center;
     font-weight: bold;
     color: #333;
+}
+
+.result-display {
+    word-wrap: break-word;
+}
+
+.url-display {
+    margin: 1rem 0;
+    padding: 4px 8px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #555;
+}
+
+.formula-display {
+    margin: 1.5rem 0;
 }
 
 .evaluation-parameter {

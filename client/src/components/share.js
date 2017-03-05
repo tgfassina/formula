@@ -39,7 +39,9 @@ class Share extends React.Component {
                                 </button>
                             </span>
                         </div>
-                        {this.getShareUrl()}
+                        <code className="data-display url-display">
+                            <small>{this.getShareUrl()}</small>
+                        </code>
                     </div>
                 </div>
             </AppSection>
