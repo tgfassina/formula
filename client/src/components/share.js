@@ -2,9 +2,22 @@ import React from 'react'
 
 import AppSection from './parts/app-section.js'
 
+const UrlLink = ({url}) => (
+    <a href={url} target="_blank">
+        <i className="fa fa-external-link"></i>
+    </a>
+)
+
 const UrlDisplay = ({url}) => (
     <code className="data-display url-display">
-        <small>{url}</small>
+        <div className="row no-gutters">
+            <div className="col-11 text-ellipsis">
+                <small>{url}</small>
+            </div>
+            <div className="col-1 text-right">
+                <UrlLink url={url} />
+            </div>
+        </div>
     </code>
 )
 

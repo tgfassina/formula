@@ -31,11 +31,12 @@
 .url-display {
     margin: 1rem 0;
     padding: 4px 8px;
+}
 
+.text-ellipsis {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    color: #555;
 }
 
 .formula-display {
