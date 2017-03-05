@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
 const ParameterVariable = ({variable}) => (
     <span className="badge badge-default">
         {variable}
     </span>
-);
+)
 
 class ParameterLabel extends React.Component {
     changeHandler(event) {
-        this.props.onChange(event.target.value);
+        this.props.onChange(event.target.value)
     }
 
     render() {
@@ -19,13 +19,13 @@ class ParameterLabel extends React.Component {
                 value={this.props.label}
                 onChange={this.changeHandler.bind(this)}
             />
-        );
+        )
     }
 }
 
 class ParameterDefaultValue extends React.Component {
     changeHandler(event) {
-        this.props.onChange(event.target.value);
+        this.props.onChange(event.target.value)
     }
 
     render() {
@@ -39,7 +39,7 @@ class ParameterDefaultValue extends React.Component {
                     onChange={this.changeHandler.bind(this)}
                 />
             </div>
-        );
+        )
     }
 }
 
@@ -48,7 +48,7 @@ const ParameterOptions = ({parameter, updater}) => (
         defaultValue={parameter.defaultValue}
         onChange={updater('defaultValue')}
     />
-);
+)
 
 const ParameterConfig = ({parameter, updater, expanded}) => (
     <div>
@@ -66,15 +66,15 @@ const ParameterConfig = ({parameter, updater, expanded}) => (
             </div>
         : null}
     </div>
-);
+)
 
 class ParameterActions extends React.Component {
     toggleHandler() {
-        this.props.onToggle();
+        this.props.onToggle()
     }
 
     deleteHandler() {
-        this.props.onDelete();
+        this.props.onDelete()
     }
 
     render() {
@@ -101,18 +101,18 @@ class ParameterActions extends React.Component {
                     </div>
                 : null}
             </div>
-        );
+        )
     }
 }
 
 class ParameterRow extends React.Component {
     constructor(props) {
-        super(props);
-        this.state = {expanded: false};
+        super(props)
+        this.state = {expanded: false}
     }
 
     toggleOptions() {
-        this.setState({expanded: !this.state.expanded});
+        this.setState({expanded: !this.state.expanded})
     }
 
     render() {
@@ -136,8 +136,8 @@ class ParameterRow extends React.Component {
                     />
                 </td>
             </tr>
-        );
+        )
     }
 }
 
-export default ParameterRow;
+export default ParameterRow

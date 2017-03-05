@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-import AppSection from './parts/app-section.js';
+import AppSection from './parts/app-section.js'
 
 class FormulaInput extends React.Component {
     handleChange(event) {
-        this.props.onUpdate(event.target.value);
+        this.props.onUpdate(event.target.value)
     }
 
     render() {
@@ -15,7 +15,7 @@ class FormulaInput extends React.Component {
                 placeholder={this.props.placeholder}
                 onChange={this.handleChange.bind(this)}
             />
-        );
+        )
     }
 }
 
@@ -27,6 +27,6 @@ const Formula = ({placeholder, onUpdate}) => (
             onUpdate={onUpdate}
         />
     </AppSection>
-);
+)
 
-export default Formula;
+export default Formula
