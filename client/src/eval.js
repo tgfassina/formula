@@ -30,7 +30,13 @@ class Eval extends React.Component {
     render() {
         return (
             <div>
-                <h1>{this.model.title}</h1>
+                <h1>
+                    {
+                        this.model.title
+                        ||
+                        <em className="text-muted">Untitled</em>
+                    }
+                </h1>
                 <FormulaDisplay formula={this.state.formula} />
                 <EvaluationTester
                     parameters={this.state.parameters}

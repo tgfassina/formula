@@ -2,7 +2,7 @@ import React from 'react'
 
 const FormulaDisplay = ({formula}) => (
     <code className="data-display formula-display">
-        {formula}
+        {formula || '-'}
     </code>
 )
 
