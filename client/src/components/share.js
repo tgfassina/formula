@@ -11,7 +11,7 @@ const UrlLink = ({url}) => (
 const UrlDisplay = ({url}) => (
     <code className="data-display url-display">
         <div className="row no-gutters">
-            <div className="col-11 text-ellipsis">
+            <div className="col-11 text-scroll">
                 <small>{url}</small>
             </div>
             <div className="col-1 text-right">
@@ -55,7 +55,7 @@ class Saver extends React.Component {
 class Share extends React.Component {
     getShareUrl() {
         if (this.props.sharedId) {
-            return 'localhost:3001/eval/'+this.props.sharedId
+            return [window.location.host, '/eval/', this.props.sharedId].join('')
         }
     }
 
