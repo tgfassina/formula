@@ -56,7 +56,7 @@ class Saver extends React.Component {
 class Share extends React.Component {
     getShareUrl() {
         if (this.props.sharedId) {
-            return [window.location.host, '/eval/', this.props.sharedId].join('')
+            return [window.location.origin, '/#/eval/', this.props.sharedId].join('')
         }
     }
 

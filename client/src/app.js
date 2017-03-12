@@ -1,5 +1,5 @@
 import React from 'react'
-import {Router, Route, IndexRoute, browserHistory} from 'react-router'
+import {Router, Route, IndexRoute, hashHistory} from 'react-router'
 
 import Layout from './layout.js'
 import Edit from './edit.js'
@@ -9,7 +9,7 @@ import NotFound from './not-found.js'
 class App extends React.Component {
     render() {
         return (
-            <Router history={browserHistory}>
+            <Router history={hashHistory}>
                 <Route path="/" component={Layout}>
                     <IndexRoute component={Edit} />
                     <Route path="/eval/:key" component={Eval} />
