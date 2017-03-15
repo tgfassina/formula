@@ -1,4 +1,5 @@
 import React from 'react'
+import firebase from 'firebase'
 
 import Parameters from './components/parameters.js'
 import Formula from './components/formula.js'
@@ -12,22 +13,27 @@ class Edit extends React.Component {
         super()
         this.model = new AppModel(this.setState.bind(this))
         this.state = this.model.export()
+
+        firebase.initializeApp({databaseURL: 'https://vardump.firebaseio.com/'})
     }
 
-    componentDidMout() {
-        this.setState({sharedId: false})
+    componentDidMount() {
+        this.setState({
+            sharedId: false,
+            saving: false,
+        })
     }
 
     save() {
-        fetch('/save', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.model.exportForDatabase()),
-        })
-        .then(response => response.json())
-        .then(data => this.setState({sharedId: data.id}))
+        this.setState({saving: true})
+        firebase
+            .database()
+            .ref('formulas')
+            .push(this.model.exportForDatabase())
+            .then(ref => this.setState({
+                sharedId: ref.key,
+                saving: false,
+            }))
     }
 
     render() {
@@ -52,6 +58,7 @@ class Edit extends React.Component {
                     onUpdate={this.model.getTitleUpdater()}
                     onSave={this.save.bind(this)}
                     sharedId={this.state.sharedId}
+                    saving={this.state.saving}
                 />
             </div>
         )

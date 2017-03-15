@@ -11,7 +11,7 @@ const UrlLink = ({url}) => (
 const UrlDisplay = ({url}) => (
     <code className="data-display url-display">
         <div className="row no-gutters">
-            <div className="col-11 text-ellipsis">
+            <div className="col-11 text-scroll">
                 <small>{url}</small>
             </div>
             <div className="col-1 text-right">
@@ -41,8 +41,9 @@ class Saver extends React.Component {
                 />
                 <span className="input-group-btn">
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-primary cursor-pointer"
                         onClick={this.clickHandler.bind(this)}
+                        disabled={this.props.saving}
                     >
                         Save
                     </button>
@@ -55,7 +56,7 @@ class Saver extends React.Component {
 class Share extends React.Component {
     getShareUrl() {
         if (this.props.sharedId) {
-            return 'localhost:3001/eval/'+this.props.sharedId
+            return [window.location.origin, '/#/eval/', this.props.sharedId].join('')
         }
     }
 
@@ -68,6 +69,7 @@ class Share extends React.Component {
                         <Saver
                             onUpdate={this.props.onUpdate}
                             onSave={this.props.onSave}
+                            saving={this.props.saving}
                         />
                         {this.props.sharedId ?
                             <UrlDisplay url={this.getShareUrl()} />

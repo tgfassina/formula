@@ -4,11 +4,12 @@
   "scripts": {
     "build": "react-scripts build",
     "fixpack": "fixpack",
-    "start": "PORT=3001 react-scripts start",
+    "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
+    "firebase": "^3.7.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
     "mathjs": "^3.9.0",
@@ -20,6 +21,5 @@
   "devDependencies": {
     "fixpack": "^2.3.1",
     "react-scripts": "0.8.5"
-  },
-  "proxy": "http://localhost:3000/"
+  }
 }
