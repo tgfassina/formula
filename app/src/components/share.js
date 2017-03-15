@@ -43,6 +43,7 @@ class Saver extends React.Component {
                     <button
                         className="btn btn-primary cursor-pointer"
                         onClick={this.clickHandler.bind(this)}
+                        disabled={this.props.saving}
                     >
                         Save
                     </button>
@@ -68,6 +69,7 @@ class Share extends React.Component {
                         <Saver
                             onUpdate={this.props.onUpdate}
                             onSave={this.props.onSave}
+                            saving={this.props.saving}
                         />
                         {this.props.sharedId ?
                             <UrlDisplay url={this.getShareUrl()} />

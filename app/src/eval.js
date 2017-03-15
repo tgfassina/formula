@@ -22,7 +22,7 @@ class Eval extends React.Component {
     load() {
         firebase
             .database()
-            .ref('test')
+            .ref('formulas')
             .child(this.props.params.key)
             .once('value')
             .then(snap => this.model.import(snap.val().data))

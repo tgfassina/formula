@@ -17,16 +17,23 @@ class Edit extends React.Component {
         firebase.initializeApp({databaseURL: 'https://vardump.firebaseio.com/'})
     }
 
-    componentDidMout() {
-        this.setState({sharedId: false})
+    componentDidMount() {
+        this.setState({
+            sharedId: false,
+            saving: false,
+        })
     }
 
     save() {
+        this.setState({saving: true})
         firebase
             .database()
-            .ref('test')
+            .ref('formulas')
             .push(this.model.exportForDatabase())
-            .then(ref => this.setState({sharedId: ref.key}))
+            .then(ref => this.setState({
+                sharedId: ref.key,
+                saving: false,
+            }))
     }
 
     render() {
@@ -51,6 +58,7 @@ class Edit extends React.Component {
                     onUpdate={this.model.getTitleUpdater()}
                     onSave={this.save.bind(this)}
                     sharedId={this.state.sharedId}
+                    saving={this.state.saving}
                 />
             </div>
         )
