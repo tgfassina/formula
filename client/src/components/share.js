@@ -41,8 +41,7 @@ class Saver extends React.Component {
                 />
                 <span className="input-group-btn">
                     <button
-                        type="button"
-                        className="btn btn-primary"
+                        className="btn btn-primary cursor-pointer"
                         onClick={this.clickHandler.bind(this)}
                     >
                         Save
