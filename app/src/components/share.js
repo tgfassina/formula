@@ -21,37 +21,29 @@ const UrlDisplay = ({url}) => (
     </code>
 )
 
-class Saver extends React.Component {
-    clickHandler() {
-        this.props.onSave()
-    }
-
-    changeHandler(event) {
-        this.props.onUpdate(event.target.value)
-    }
-
-    render() {
-        return (
-            <div className="input-group">
-                <input
-                    type="text"
-                    className="form-control"
-                    onChange={this.changeHandler.bind(this)}
-                    placeholder="Name"
-                />
-                <span className="input-group-btn">
-                    <button
-                        className="btn btn-primary cursor-pointer"
-                        onClick={this.clickHandler.bind(this)}
-                        disabled={this.props.saving}
-                    >
-                        Save
-                    </button>
-                </span>
-            </div>
-        )
-    }
-}
+const Saver = ({
+  onSave,
+  onUpdate,
+  saving,
+}) => (
+    <div className="input-group">
+        <input
+            type="text"
+            className="form-control"
+            onChange={(event) => onUpdate(event.currentTarget.value)}
+            placeholder="Name"
+        />
+        <span className="input-group-btn">
+            <button
+                className="btn btn-primary cursor-pointer"
+                onClick={(event) => onSave()}
+                disabled={saving}
+            >
+                Save
+            </button>
+        </span>
+    </div>
+)
 
 class Share extends React.Component {
     getShareUrl() {
