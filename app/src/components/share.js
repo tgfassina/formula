@@ -45,32 +45,34 @@ const Saver = ({
     </div>
 )
 
-class Share extends React.Component {
-    getShareUrl() {
-        if (this.props.sharedId) {
-            return [window.location.origin, '/#/eval/', this.props.sharedId].join('')
-        }
+const getShareUrl = (sharedId) => {
+    if (!sharedId) {
+        return
     }
-
-    render() {
-        return (
-            <AppSection>
-                <h1>Share</h1>
-                <div className="row justify-content-center">
-                    <div className="col-10">
-                        <Saver
-                            onUpdate={this.props.onUpdate}
-                            onSave={this.props.onSave}
-                            saving={this.props.saving}
-                        />
-                        {this.props.sharedId ?
-                            <UrlDisplay url={this.getShareUrl()} />
-                        : null}
-                    </div>
-                </div>
-            </AppSection>
-        )
-    }
+    return [window.location.origin, '/#/eval/', sharedId].join('')
 }
+
+const Share = ({
+    sharedId,
+    onUpdate,
+    onSave,
+    saving = false,
+}) => (
+    <AppSection>
+        <h1>Share</h1>
+        <div className="row justify-content-center">
+            <div className="col-10">
+                <Saver
+                    onUpdate={onUpdate}
+                    onSave={onSave}
+                    saving={saving}
+                />
+                {sharedId ?
+                    <UrlDisplay url={getShareUrl(sharedId)} />
+                : null}
+            </div>
+        </div>
+    </AppSection>
+)
 
 export default Share
