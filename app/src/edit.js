@@ -13,14 +13,13 @@ class Edit extends React.Component {
     constructor() {
         super()
         this.model = new AppModel(this.setState.bind(this))
-        this.state = this.model.export()
-    }
 
-    componentDidMount() {
-        this.setState({
+        this.state = this.model.export()
+        this.state = {
+            ...this.state,
             sharedId: false,
             saving: false,
-        })
+        }
     }
 
     save() {
