@@ -3,26 +3,20 @@ import React from 'react'
 import AppSection from './parts/app-section.js'
 import ParameterRow from './parameter-row.js'
 
-class ParametersTableFooter extends React.Component {
-    clickHandler() {
-        this.props.onAdd()
-    }
-
-    render() {
-        return (
-            <tr>
-                <td colSpan="3">
-                    <button
-                        className="btn btn-secondary btn-block btn-sm"
-                        onClick={this.clickHandler.bind(this)}
-                    >
-                        <i className="fa fa-plus" /> Add
-                    </button>
-                </td>
-            </tr>
-        )
-    }
-}
+const ParametersTableFooter = ({
+    onAdd,
+}) => (
+    <tr>
+        <td colSpan="3">
+            <button
+                className="btn btn-secondary btn-block btn-sm"
+                onClick={() => onAdd()}
+            >
+                <i className="fa fa-plus" /> Add
+            </button>
+        </td>
+    </tr>
+)
 
 const ParametersTableEmpty = () => (
     <tr>
