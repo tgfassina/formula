@@ -23,14 +23,14 @@ const UrlDisplay = ({url}) => (
 
 const Saver = ({
   onSave,
-  onUpdate,
+  onChange,
   saving,
 }) => (
     <div className="input-group">
         <input
             type="text"
             className="form-control"
-            onChange={(event) => onUpdate(event.currentTarget.value)}
+            onChange={(event) => onChange(event.currentTarget.value)}
             placeholder="Name"
         />
         <span className="input-group-btn">
@@ -54,8 +54,8 @@ const getShareUrl = (sharedId) => {
 
 const Share = ({
     sharedId,
-    onUpdate,
     onSave,
+    onChange,
     saving = false,
 }) => (
     <AppSection>
@@ -63,8 +63,8 @@ const Share = ({
         <div className="row justify-content-center">
             <div className="col-10">
                 <Saver
-                    onUpdate={onUpdate}
                     onSave={onSave}
+                    onChange={onChange}
                     saving={saving}
                 />
                 {sharedId ?

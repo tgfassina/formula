@@ -17,7 +17,7 @@ class Edit extends React.Component {
         super()
         this.state = {
             model: getEmptyModel(),
-            sharedId: false,
+            sharedId: null,
             saving: false,
         }
     }
@@ -30,6 +30,12 @@ class Edit extends React.Component {
         const model = this.state.model
         const changedModel = transformer(model)
         this.setState({ model: changedModel })
+    }
+
+    updateTitle(title) {
+        this.transformStateModel((model) => {
+            return {...model, title: title}
+        })
     }
 
     createParameter() {
@@ -100,9 +106,9 @@ class Edit extends React.Component {
                     formula={this.state.model.formula || placeholderFormula}
                 />
                 <Share
-                    // onUpdate={this.model.getTitleUpdater()}
-                    onSave={this.save.bind(this)}
                     sharedId={this.state.sharedId}
+                    onChange={(title) => this.updateTitle(title)}
+                    onSave={() => this.save()}
                     saving={this.state.saving}
                 />
             </div>
