@@ -6,22 +6,17 @@ const ParameterVariable = ({variable}) => (
     </span>
 )
 
-class ParameterLabel extends React.Component {
-    changeHandler(event) {
-        this.props.onChange(event.target.value)
-    }
-
-    render() {
-        return (
-            <input
-                type="text"
-                className="form-control form-control-sm"
-                value={this.props.label}
-                onChange={this.changeHandler.bind(this)}
-            />
-        )
-    }
-}
+const ParameterLabel = ({
+    label,
+    onChange,
+}) => (
+    <input
+        type="text"
+        className="form-control form-control-sm"
+        value={label}
+        onChange={(event) => onChange(event.target.value)}
+    />
+)
 
 const ParameterDefaultValue = ({
     defaultValue,
