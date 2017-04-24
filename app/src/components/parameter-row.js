@@ -7,7 +7,7 @@ const ParameterVariable = ({variable}) => (
 )
 
 const ParameterLabel = ({
-    label,
+    label = '',
     onChange,
 }) => (
     <input
@@ -19,7 +19,7 @@ const ParameterLabel = ({
 )
 
 const ParameterDefaultValue = ({
-    defaultValue,
+    value = '',
     onChange,
 }) => (
     <div className="inline-control-group text-right">
@@ -27,31 +27,31 @@ const ParameterDefaultValue = ({
         <input
             type="number"
             className="form-control form-control-sm"
-            value={defaultValue}
+            value={value}
             onChange={(event) => onChange(event.target.value)}
         />
     </div>
 )
 
-const ParameterOptions = ({parameter, updater}) => (
+const ParameterOptions = ({parameter, onChange}) => (
     <ParameterDefaultValue
-        defaultValue={parameter.defaultValue}
-        onChange={updater('defaultValue')}
+        value={parameter.defaultValue}
+        onChange={onChange}
     />
 )
 
-const ParameterConfig = ({parameter, updater, expanded}) => (
+const ParameterConfig = ({parameter, onChange, expanded}) => (
     <div>
         <ParameterLabel
             label={parameter.label}
-            onChange={updater('label')}
+            onChange={(label) => onChange({...parameter, label: label})}
         />
 
         {expanded ?
             <div className="parameter-extra">
                 <ParameterOptions
                     parameter={parameter}
-                    updater={updater}
+                    onChange={(defaultValue) => onChange({...parameter, defaultValue: defaultValue})}
                 />
             </div>
         : null}
@@ -106,23 +106,29 @@ class ParameterRow extends React.Component {
     }
 
     render() {
+        const {
+            parameter,
+            onChange,
+            onDelete,
+        } = this.props
+
         return (
             <tr>
                 <td className="text-right">
-                    <ParameterVariable variable={this.props.parameter.variable} />
+                    <ParameterVariable variable={parameter.variable} />
                 </td>
                 <td>
                     <ParameterConfig
-                        parameter={this.props.parameter}
-                        updater={this.props.updater}
+                        parameter={parameter}
+                        onChange={onChange}
                         expanded={this.state.expanded}
                     />
                 </td>
                 <td className="text-center table-row-actions">
                     <ParameterActions
+                        onToggle={() => this.toggleOptions()}
+                        onDelete={onDelete}
                         expanded={this.state.expanded}
-                        onToggle={this.toggleOptions.bind(this)}
-                        onDelete={this.props.onDelete}
                     />
                 </td>
             </tr>

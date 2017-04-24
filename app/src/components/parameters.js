@@ -6,16 +6,18 @@ import ParameterRow from './parameter-row.js'
 const ParametersTableFooter = ({
     onAdd,
 }) => (
-    <tr>
-        <td colSpan="3">
-            <button
-                className="btn btn-secondary btn-block btn-sm"
-                onClick={() => onAdd()}
-            >
-                <i className="fa fa-plus" /> Add
-            </button>
-        </td>
-    </tr>
+    <tfoot>
+        <tr>
+            <td colSpan="3">
+                <button
+                    className="btn btn-secondary btn-block btn-sm"
+                    onClick={(event) => onAdd(null, {})}
+                >
+                    <i className="fa fa-plus" /> Add
+                </button>
+            </td>
+        </tr>
+    </tfoot>
 )
 
 const ParametersTableEmpty = () => (
@@ -26,41 +28,42 @@ const ParametersTableEmpty = () => (
     </tr>
 )
 
-class ParametersTable extends React.Component {
-    mapTableRows() {
-        const mapper = (parameter, i) => (
-            <ParameterRow
-                key={parameter.variable}
-                parameter={parameter}
-                updater={this.props.updater(i)}
-                onDelete={this.props.deleter(i)}
-            />
-        )
-        const rows = this.props.parameters.map(mapper)
-        return rows.length ? rows : <ParametersTableEmpty />
-    }
-
-    render() {
-        return (
-            <table className="table table-bordered table-sm">
-                <tbody>
-                    {this.mapTableRows()}
-                    <ParametersTableFooter onAdd={this.props.onAdd} />
-                </tbody>
-            </table>
-        )
-    }
+const ParametersTableBody = ({
+    parameters,
+    onChangeParameter,
+    onDeleteParameter,
+}) => {
+    const rows = Object.values(parameters).map((parameter = {}, i) => (
+        <ParameterRow
+            key={i}
+            parameter={parameter}
+            onDelete={() => onDeleteParameter(i)}
+            onChange={(parameter) => onChangeParameter(i, parameter)}
+        />
+    ))
+    return (<tbody>
+        { rows.length ? rows : <ParametersTableEmpty /> }
+    </tbody>)
 }
 
-const Parameters = ({parameters, onAdd, updater, deleter}) => (
+const Parameters = ({
+    parameters,
+    onCreateParameter,
+    onChangeParameter,
+    onDeleteParameter,
+}) => (
     <AppSection>
         <h1>Choose parameters</h1>
-        <ParametersTable
-            parameters={parameters}
-            onAdd={onAdd}
-            updater={updater}
-            deleter={deleter}
-        />
+        <table className="table table-bordered table-sm">
+            <ParametersTableBody
+                parameters={parameters}
+                onChangeParameter={onChangeParameter}
+                onDeleteParameter={onDeleteParameter}
+            />
+            <ParametersTableFooter
+                onAdd={() => onCreateParameter()}
+            />
+        </table>
     </AppSection>
 )
 

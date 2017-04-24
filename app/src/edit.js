@@ -7,53 +7,87 @@ import Formula from './components/formula.js'
 import Evaluation from './components/evaluation.js'
 import Share from './components/share.js'
 
-import AppModel from './models/app.js'
+import {
+    getEmptyModel,
+    fromModel,
+} from './models/app.js'
 
 class Edit extends React.Component {
     constructor() {
         super()
-        this.model = new AppModel(this.setState.bind(this))
-
-        this.state = this.model.export()
         this.state = {
-            ...this.state,
+            model: getEmptyModel(),
             sharedId: false,
             saving: false,
         }
     }
 
+    setSaving(isSaving) {
+        this.setState({saving: isSaving})
+    }
+
+    transformStateModel(transformer) {
+        const model = this.state.model
+        const changedModel = transformer(model)
+        this.setState({ model: changedModel })
+    }
+
+    createParameter() {
+        this.transformStateModel((model) => {
+            return fromModel(model).createParameter()
+        })
+    }
+
+    changeParameter(id, parameter) {
+        this.transformStateModel((model) => {
+            return fromModel(model).changeParameter(id, parameter)
+        })
+    }
+
+    deleteParameter(id) {
+        this.transformStateModel((model) => {
+            return fromModel(model).deleteParameter(id)
+        })
+    }
+
+    updateSharedId(id) {
+        this.setState({
+            sharedId: id,
+        })
+    }
+
     save() {
-        this.setState({saving: true})
+        const model = this.state.model
+
+        this.setSaving(true)
         firebase
             .database()
             .ref('formulas')
-            .push(this.model.exportForDatabase())
-            .then(ref => this.setState({
-                sharedId: ref.key,
-                saving: false,
-            }))
+            .push(model)
+            .then(ref => this.updateSharedId(ref.key))
+            .then(() => this.setSaving(false))
     }
 
     render() {
         return (
             <div>
                 <Parameters
-                    parameters={this.state.parameters}
-                    onAdd={this.model.getParametersAdder()}
-                    updater={this.model.getParametersUpdater()}
-                    deleter={this.model.getParametersDeleter()}
+                    parameters={this.state.model.parameters}
+                    onCreateParameter={() => this.createParameter()}
+                    onChangeParameter={(id, parameter) => this.changeParameter(id, parameter)}
+                    onDeleteParameter={(id) => this.deleteParameter(id)}
                 />
                 <Formula
-                    placeholder={this.state.formulaPlaceholder}
-                    onUpdate={this.model.getFormulaUpdater()}
+                    placeholder={this.state.model.formulaPlaceholder}
+                    // onUpdate={this.model.getFormulaUpdater()}
                 />
                 <Evaluation
-                    parameters={this.state.parameters}
-                    result={this.state.result}
-                    updater={this.model.getValuesUpdater()}
+                    parameters={this.state.model.parameters}
+                    // result={this.state.result}
+                    // updater={this.model.getValuesUpdater()}
                 />
                 <Share
-                    onUpdate={this.model.getTitleUpdater()}
+                    // onUpdate={this.model.getTitleUpdater()}
                     onSave={this.save.bind(this)}
                     sharedId={this.state.sharedId}
                     saving={this.state.saving}

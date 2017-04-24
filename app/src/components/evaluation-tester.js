@@ -45,14 +45,14 @@ const EvaluationNoParameters = () => (
 
 class EvaluationTester extends React.Component {
     mapParameters() {
-        const mapper = (parameter, i) => (
+        const mapper = (parameter = {}, i) => (
             <EvaluationParameter
-                key={parameter.variable}
+                key={i}
                 parameter={parameter}
-                onChange={this.props.updater(parameter.variable)}
+                // onChange={this.props.updater(parameter.variable)}
             />
         )
-        const parameters = this.props.parameters.map(mapper)
+        const parameters = Object.values(this.props.parameters).map(mapper)
         return parameters.length ? parameters : <EvaluationNoParameters />
     }
 

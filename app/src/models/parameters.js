@@ -1,72 +1,46 @@
-class ParametersModel {
-    constructor(stateUpdater) {
-        this.stateUpdater = stateUpdater
-        this.count = 0
-        this.data = []
-        this.scope = {}
+export const getEmptyModel = () => ({})
+
+const isValidId = (id) => Number.parseInt(id, 10) >= 0
+
+export const getChangeParameter = (model) => (id, parameter) => {
+    if (!isValidId(id)) {
+        throw new Error('id should be defined')
     }
 
-    export() {
-        return this.data
+    const changedCollection = {
+        ...model,
+        [id]: parameter,
     }
 
-    exportDefaultFormula() {
-        const mapper = (parameter) => (parameter.variable)
-        return this.data.map(mapper).join(' + ')
-    }
-
-    exportScope() {
-        return Object.assign(this.getDefaultScope(), this.scope)
-    }
-
-    import(data) {
-        this.count = data.length
-        this.data = data
-    }
-
-
-    getAdder() {
-        return () => {
-            this.count++
-
-            const newParameter = {
-                variable: ['X', this.count].join(''),
-                defaultValue: '',
-                label: '',
-            }
-
-            this.data.push(newParameter)
-            this.stateUpdater()
-        }
-    }
-
-    getUpdater() {
-        return (key) => (attribute) => (value) => {
-            this.data[key][attribute] = value
-            this.stateUpdater()
-        }
-    }
-
-    getDeleter() {
-        return (key) => () => {
-            this.data.splice(key, 1)
-            this.stateUpdater()
-        }
-    }
-
-    getScopeUpdater() {
-        return (variable) => (value) => {
-            this.scope[variable] = value
-            this.stateUpdater()
-        }
-    }
-
-    getDefaultScope() {
-        return this.data.reduce((carry, param) => {
-            carry[param.variable] = param.defaultValue
-            return carry
-        }, {})
-    }
+    return changedCollection
 }
 
-export default ParametersModel
+export const getCreateParameter = (model) => () => {
+    const id = Object.values(model).length
+
+    const parameter = {
+        label: '',
+        variable: `X${id + 1}`,
+        defaultValue: '',
+    }
+
+    const changedCollection = {
+        ...model,
+        [id]: parameter,
+    }
+
+    return changedCollection
+}
+
+export const getDeleteParameter = (model) => (id) => {
+    if (!isValidId(id)) {
+        throw new Error('id should be defined')
+    }
+
+    const changedCollection = {
+        ...model,
+    }
+    delete changedCollection[id]
+
+    return changedCollection
+}
