@@ -9,8 +9,6 @@ import {
     getChangeFormula
 } from './formula'
 
-// import EvaluatorModel from './evaluator.js'
-
 export const getEmptyModel = () => ({
     formula: '',
     parameters: getEmptyParametersModel(),

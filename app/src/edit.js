@@ -81,6 +81,8 @@ class Edit extends React.Component {
                 .join(' + ')
         )
 
+        const placeholderFormula = getFormulaPlaceHolder(this.state.model.parameters)
+
         return (
             <div>
                 <Parameters
@@ -95,8 +97,7 @@ class Edit extends React.Component {
                 />
                 <Evaluation
                     parameters={this.state.model.parameters}
-                    // result={this.state.result}
-                    // updater={this.model.getValuesUpdater()}
+                    formula={this.state.model.formula || placeholderFormula}
                 />
                 <Share
                     // onUpdate={this.model.getTitleUpdater()}
