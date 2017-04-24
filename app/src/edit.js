@@ -56,6 +56,12 @@ class Edit extends React.Component {
         })
     }
 
+    changeFormula(formula) {
+        this.transformStateModel((model) => {
+            return fromModel(model).changeFormula(formula)
+        })
+    }
+
     save() {
         const model = this.state.model
 
@@ -69,6 +75,12 @@ class Edit extends React.Component {
     }
 
     render() {
+        const getFormulaPlaceHolder = (parameters = {}) => (
+            Object.values(parameters)
+                .map((el) => el.variable)
+                .join(' + ')
+        )
+
         return (
             <div>
                 <Parameters
@@ -78,8 +90,8 @@ class Edit extends React.Component {
                     onDeleteParameter={(id) => this.deleteParameter(id)}
                 />
                 <Formula
-                    placeholder={this.state.model.formulaPlaceholder}
-                    // onUpdate={this.model.getFormulaUpdater()}
+                    placeholder={getFormulaPlaceHolder(this.state.model.parameters)}
+                    onChange={(formula) => this.changeFormula(formula)}
                 />
                 <Evaluation
                     parameters={this.state.model.parameters}

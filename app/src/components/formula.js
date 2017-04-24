@@ -4,22 +4,22 @@ import AppSection from './parts/app-section.js'
 
 const FormulaInput = ({
     placeholder,
-    onUpdate,
+    onChange,
 }) => (
     <input
         type="text"
         className="form-control formula-input"
         placeholder={placeholder}
-        onChange={(event) => onUpdate(event.target.value)}
+        onChange={(event) => onChange(event.target.value)}
     />
 )
 
-const Formula = ({placeholder, onUpdate}) => (
+const Formula = ({placeholder, onChange}) => (
     <AppSection>
         <h1>Write formula</h1>
         <FormulaInput
             placeholder={placeholder}
-            onUpdate={onUpdate}
+            onChange={onChange}
         />
     </AppSection>
 )

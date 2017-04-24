@@ -5,7 +5,10 @@ import {
     getEmptyModel as getEmptyParametersModel,
 } from './parameters'
 
-// import FormulaModel from './formula.js'
+import {
+    getChangeFormula
+} from './formula'
+
 // import EvaluatorModel from './evaluator.js'
 
 export const getEmptyModel = () => ({
@@ -27,4 +30,8 @@ export const fromModel = (model) => ({
         ...model,
         parameters: getDeleteParameter(model.parameters)(id),
     }),
+    changeFormula: (formula) => ({
+        ...model,
+        formula: getChangeFormula(model.formula)(formula)
+    })
 })
