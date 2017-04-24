@@ -1,9 +1,10 @@
 import React from 'react'
 
-import firebase from './firebase'
+import firebase from '../../lib/firebase'
 
-import EvaluationTester from './components/evaluation-tester.js'
-import FormulaDisplay from './components/formula-display.js'
+import FormulaDisplay from './formula-display.js'
+
+import EvaluationTester from '../../ui/evaluation-tester'
 
 const EmptyTitle = () => (
     <em className="text-muted">Untitled</em>

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import AppSection from './parts/app-section.js'
-import EvaluationTester from './evaluation-tester.js'
+import AppSection from '../../ui/app-section'
+import EvaluationTester from '../../ui/evaluation-tester'
 
 const Evaluation = ({parameters, formula}) => (
     <AppSection>

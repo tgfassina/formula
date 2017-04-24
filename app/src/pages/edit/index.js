@@ -1,16 +1,16 @@
 import React from 'react'
 
-import firebase from './firebase'
+import firebase from '../../lib/firebase'
 
-import Parameters from './components/parameters.js'
-import Formula from './components/formula.js'
-import Evaluation from './components/evaluation.js'
-import Share from './components/share.js'
+import Parameters from './parameters'
+import Formula from './formula'
+import Evaluation from './evaluation'
+import Share from './share'
 
 import {
     getEmptyModel,
     fromModel,
-} from './models/app.js'
+} from '../../models'
 
 class Edit extends React.Component {
     constructor() {

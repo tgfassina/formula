@@ -1,6 +1,8 @@
 import React from 'react'
 
-import AppSection from './parts/app-section.js'
+import './formula.css'
+
+import AppSection from '../../ui/app-section'
 
 const FormulaInput = ({
     placeholder,

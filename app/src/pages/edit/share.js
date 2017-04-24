@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AppSection from './parts/app-section.js'
+import AppSection from '../../ui/app-section'
 
 const UrlLink = ({url}) => (
     <a href={url} target="_blank">

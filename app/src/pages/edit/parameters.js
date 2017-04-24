@@ -1,7 +1,8 @@
 import React from 'react'
 
-import AppSection from './parts/app-section.js'
-import ParameterRow from './parameter-row.js'
+import ParameterRow from './parameter-row'
+
+import AppSection from '../../ui/app-section'
 
 const ParametersTableFooter = ({
     onAdd,
