@@ -81,22 +81,22 @@ class Edit extends React.Component {
                 .join(' + ')
         )
 
-        const placeholderFormula = getFormulaPlaceHolder(this.state.model.parameters)
+        const placeholderFormula = getFormulaPlaceHolder(this.state.model.parameters.collection)
 
         return (
             <div>
                 <Parameters
-                    parameters={this.state.model.parameters}
+                    parameters={this.state.model.parameters.collection}
                     onCreateParameter={() => this.createParameter()}
                     onChangeParameter={(id, parameter) => this.changeParameter(id, parameter)}
                     onDeleteParameter={(id) => this.deleteParameter(id)}
                 />
                 <Formula
-                    placeholder={getFormulaPlaceHolder(this.state.model.parameters)}
+                    placeholder={getFormulaPlaceHolder(this.state.model.parameters.collection)}
                     onChange={(formula) => this.changeFormula(formula)}
                 />
                 <Evaluation
-                    parameters={this.state.model.parameters}
+                    parameters={this.state.model.parameters.collection}
                     formula={this.state.model.formula || placeholderFormula}
                 />
                 <Share

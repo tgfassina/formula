@@ -33,12 +33,12 @@ const ParametersTableBody = ({
     onChangeParameter,
     onDeleteParameter,
 }) => {
-    const rows = Object.values(parameters).map((parameter = {}, i) => (
+    const rows = Object.values(parameters).map((parameter = {}) => (
         <ParameterRow
-            key={i}
+            key={parameter.id}
             parameter={parameter}
-            onDelete={() => onDeleteParameter(i)}
-            onChange={(parameter) => onChangeParameter(i, parameter)}
+            onDelete={() => onDeleteParameter(parameter.id)}
+            onChange={(parameter) => onChangeParameter(parameter.id, parameter)}
         />
     ))
     return (<tbody>

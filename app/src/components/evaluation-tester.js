@@ -46,11 +46,11 @@ const EvaluationParameters = ({
     variables,
     onChangeVariable,
 }) => {
-    const mapper = (variable, i) => (
+    const mapper = (variable) => (
         <EvaluationParameter
-            key={i}
+            key={variable.id}
             variable={variable}
-            onChange={(value) => onChangeVariable(i, value)}
+            onChange={(value) => onChangeVariable(variable.id, value)}
         />
     )
     const list = Object.values(variables).map(mapper)
@@ -59,9 +59,9 @@ const EvaluationParameters = ({
 
 const getVariables = (parameters, values) => {
     return Object.values(parameters)
-        .map((parameter, index) => ({
+        .map((parameter) => ({
             ...parameter,
-            value: values[index]
+            value: values[parameter.id]
         }))
 }
 

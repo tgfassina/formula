@@ -1,4 +1,7 @@
-export const getEmptyModel = () => ({})
+export const getEmptyModel = () => ({
+    count: 0,
+    collection: 0,
+})
 
 const isValidId = (id) => Number.parseInt(id, 10) >= 0
 
@@ -8,28 +11,31 @@ export const getChangeParameter = (model) => (id, parameter) => {
     }
 
     const changedCollection = {
-        ...model,
+        ...model.collection,
         [id]: parameter,
     }
 
-    return changedCollection
+    return { ...model, collection: changedCollection }
 }
 
 export const getCreateParameter = (model) => () => {
-    const id = Object.values(model).length
+    const id = model.count
 
     const parameter = {
+        id: id,
         label: '',
-        variable: `X${id + 1}`,
+        variable: `X${id}`,
         defaultValue: '',
     }
 
     const changedCollection = {
-        ...model,
+        ...model.collection,
         [id]: parameter,
     }
 
-    return changedCollection
+    const nextCount = model.count + 1
+
+    return { ...model, count: nextCount, collection: changedCollection }
 }
 
 export const getDeleteParameter = (model) => (id) => {
@@ -38,9 +44,9 @@ export const getDeleteParameter = (model) => (id) => {
     }
 
     const changedCollection = {
-        ...model,
+        ...model.collection,
     }
     delete changedCollection[id]
 
-    return changedCollection
+    return { ...model, collection: changedCollection }
 }
