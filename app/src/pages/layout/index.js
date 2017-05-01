@@ -1,8 +1,7 @@
 import React from 'react'
 
-import './vendor/index.js'
-import './styles/custom.css'
-import './styles/formula.css'
+import './vendor'
+import './custom.css'
 
 const Layout = ({children}) => (
     <div className="row justify-content-center">

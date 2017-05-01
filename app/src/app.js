@@ -1,10 +1,10 @@
 import React from 'react'
 import {Router, Route, IndexRoute, hashHistory} from 'react-router'
 
-import Layout from './layout.js'
-import Edit from './edit.js'
-import Eval from './eval.js'
-import NotFound from './not-found.js'
+import Layout from './pages/layout'
+import Edit from './pages/edit'
+import Eval from './pages/eval'
+import NotFound from './pages/not-found'
 
 class App extends React.Component {
     render() {

@@ -6,62 +6,52 @@ const ParameterVariable = ({variable}) => (
     </span>
 )
 
-class ParameterLabel extends React.Component {
-    changeHandler(event) {
-        this.props.onChange(event.target.value)
-    }
-
-    render() {
-        return (
-            <input
-                type="text"
-                className="form-control form-control-sm"
-                value={this.props.label}
-                onChange={this.changeHandler.bind(this)}
-            />
-        )
-    }
-}
-
-class ParameterDefaultValue extends React.Component {
-    changeHandler(event) {
-        this.props.onChange(event.target.value)
-    }
-
-    render() {
-        return (
-            <div className="inline-control-group text-right">
-                <label><small>Default value</small></label>
-                <input
-                    type="number"
-                    className="form-control form-control-sm"
-                    value={this.props.defaultValue}
-                    onChange={this.changeHandler.bind(this)}
-                />
-            </div>
-        )
-    }
-}
-
-const ParameterOptions = ({parameter, updater}) => (
-    <ParameterDefaultValue
-        defaultValue={parameter.defaultValue}
-        onChange={updater('defaultValue')}
+const ParameterLabel = ({
+    label = '',
+    onChange,
+}) => (
+    <input
+        type="text"
+        className="form-control form-control-sm"
+        value={label}
+        onChange={(event) => onChange(event.target.value)}
     />
 )
 
-const ParameterConfig = ({parameter, updater, expanded}) => (
+const ParameterDefaultValue = ({
+    value = '',
+    onChange,
+}) => (
+    <div className="inline-control-group text-right">
+        <label><small>Default value</small></label>
+        <input
+            type="number"
+            className="form-control form-control-sm"
+            value={value}
+            onChange={(event) => onChange(event.target.value)}
+        />
+    </div>
+)
+
+const ParameterOptions = ({parameter, onChange}) => (
+    <ParameterDefaultValue
+        value={parameter.defaultValue}
+        onChange={onChange}
+    />
+)
+
+const ParameterConfig = ({parameter, onChange, expanded}) => (
     <div>
         <ParameterLabel
             label={parameter.label}
-            onChange={updater('label')}
+            onChange={(label) => onChange({...parameter, label: label})}
         />
 
         {expanded ?
             <div className="parameter-extra">
                 <ParameterOptions
                     parameter={parameter}
-                    updater={updater}
+                    onChange={(defaultValue) => onChange({...parameter, defaultValue: defaultValue})}
                 />
             </div>
         : null}
@@ -116,23 +106,29 @@ class ParameterRow extends React.Component {
     }
 
     render() {
+        const {
+            parameter,
+            onChange,
+            onDelete,
+        } = this.props
+
         return (
             <tr>
                 <td className="text-right">
-                    <ParameterVariable variable={this.props.parameter.variable} />
+                    <ParameterVariable variable={parameter.variable} />
                 </td>
                 <td>
                     <ParameterConfig
-                        parameter={this.props.parameter}
-                        updater={this.props.updater}
+                        parameter={parameter}
+                        onChange={onChange}
                         expanded={this.state.expanded}
                     />
                 </td>
                 <td className="text-center table-row-actions">
                     <ParameterActions
+                        onToggle={() => this.toggleOptions()}
+                        onDelete={onDelete}
                         expanded={this.state.expanded}
-                        onToggle={this.toggleOptions.bind(this)}
-                        onDelete={this.props.onDelete}
                     />
                 </td>
             </tr>
