@@ -68,8 +68,8 @@ const getVariables = (parameters, values) => {
 const getVariableToValueMapping = (variables) =>
     Object.values(variables)
         .reduce((acc, variable) => {
-            const value = Number.parseInt(variable.value, 10)
-            const defaultValue = Number.parseInt(variable.defaultValue, 10)
+            const value = Number(variable.value, 10)
+            const defaultValue = Number(variable.defaultValue, 10)
             acc[variable.variable] = value >= 0 ? value : defaultValue
             return acc
         }, {})
